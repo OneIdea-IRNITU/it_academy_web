@@ -15,11 +15,11 @@ const router = new VueRouter({
             component: EventList
         },
         {
-            path: '/contest/:id',
+            path: publicPath + 'contest/:id',
             component: ContestCard,
         },
         {
-            path: "/page-not-found",
+            path: publicPath + 'page-not-found',
             alias: '*',
             component: {render: (h) => h("div", ["404! Page Not Found!"])},
         },
