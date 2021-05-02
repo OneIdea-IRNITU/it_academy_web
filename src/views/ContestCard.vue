@@ -21,7 +21,7 @@
           </div>
 
           <div class="organizers">Организатор:
-            <a href="">{{ contest.organizers }}</a>
+            <a class="organizer-items">{{ contest.organizers }}</a>
           </div>
 
           <div class="mt-auto">
@@ -40,7 +40,7 @@
       <div v-if="contest.description" class="row mt-3 mb-3">
         <div class="col-10">
           <h2>О мероприятии</h2>
-          <div class="description">{{ contest.description }}</div>
+          <div v-html="contest.description" class="description"></div>
         </div>
       </div>
 
