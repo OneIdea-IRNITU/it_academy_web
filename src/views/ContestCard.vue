@@ -6,7 +6,9 @@
       <div class="row">
         <div class="col-6 d-flex align-items-start flex-column">
           <h1>{{ contest.fullname }}</h1>
+
           <a class="category">#{{ contest.category }}</a>
+
           <div class="event-dates">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                  class="bi bi-calendar-event" viewBox="0 0 16 16">
@@ -21,8 +23,6 @@
           <div class="organizers">Организатор:
             <a href="">{{ contest.organizers }}</a>
           </div>
-          <div class="description">{{ contest.description }}</div>
-
 
           <div class="mt-auto">
             <button type="button" class="btn btn-primary mt-3 btn-lg">Подавть заявку</button>
@@ -35,6 +35,13 @@
           </div>
         </div>
 
+      </div>
+
+      <div v-if="contest.description" class="row mt-3 mb-3">
+        <div class="col-10">
+          <h2>О мероприятии</h2>
+          <div class="description">{{ contest.description }}</div>
+        </div>
       </div>
 
 

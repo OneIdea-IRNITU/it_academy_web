@@ -1,7 +1,12 @@
 <template>
   <div>
     <h1>Список мероприятий</h1>
-    <router-link to="contest/33">Перейти к конкурсу с id 33</router-link>
+    <div>
+      <router-link to="contest/33">Перейти к конкурсу с id 33</router-link>
+    </div>
+    <div>
+      <router-link to="contest/73">Перейти к конкурсу с id 73</router-link>
+    </div>
   </div>
 </template>
 
