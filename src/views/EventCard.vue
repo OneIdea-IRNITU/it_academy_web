@@ -54,7 +54,7 @@
 import axios from "axios";
 
 export default {
-  name: "ContestCard",
+  name: "EventCard",
   data: function () {
     return {
       loading: true,
@@ -80,12 +80,12 @@ export default {
 
           if (this.contest.startdate > 0) {
             let startdate = new Date(this.contest.startdate * 1000)
-            this.contest.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3)
+            this.contest.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
           }
           if (this.contest.enddate > 0) {
             let enddate = new Date(this.contest.enddate * 1000)
-            this.contest.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3)
+            this.contest.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
           }
 
         })
