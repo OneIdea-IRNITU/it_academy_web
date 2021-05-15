@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ContestCard from "@/views/ContestCard";
+import ContestCard from "@/views/EventCard";
 import EventList from "@/views/EventList";
 import {publicPath} from "../vue.config";
 

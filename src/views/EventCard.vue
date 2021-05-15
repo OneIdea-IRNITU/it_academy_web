@@ -54,7 +54,7 @@
 import axios from "axios";
 
 export default {
-  name: "ContestCard",
+  name: "EventCard",
   data: function () {
     return {
       loading: true,
