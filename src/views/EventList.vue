@@ -11,8 +11,39 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "EventList"
+  name: "EventList",
+  data: function () {
+    return {
+      loading: true,
+      errored: false,
+      events: [{
+        category: null,
+        course_id: null,
+        description: null,
+        enddate: null,
+        fullname: null,
+        image: null,
+        organizers: null,
+        startdate: null,
+      }],
+    }
+  },
+  mounted() {
+    axios
+        .get('https://open.istu.edu/api/get_all_events.php')
+        .then(response => {
+          this.events = response.data
+          console.log(this.events)
+        })
+        .catch(error => {
+          console.log(error);
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
+  }
 }
 </script>
 
