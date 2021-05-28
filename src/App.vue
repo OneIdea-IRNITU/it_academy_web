@@ -2,6 +2,7 @@
   <div id="app">
     <div class="container">
       <div class="content">
+        <FlashMessage></FlashMessage>
         <router-view/>
       </div>
     </div>
