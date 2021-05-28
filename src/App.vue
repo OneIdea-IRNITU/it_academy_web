@@ -30,4 +30,20 @@ export default {
 .content {
   min-height: calc(100vh - 96px);
 }
+
+
+._vue-flash-msg-body_success {
+  z-index: 100000;
+}
+
+._vue-flash-msg-body {
+
+}
+
+._vue-flash-msg-_right-bottom {
+
+}
+
+._vue-flash-msg-body__text {
+}
 </style>
