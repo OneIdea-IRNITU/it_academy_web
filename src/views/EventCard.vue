@@ -1,6 +1,10 @@
 <template>
   <div class="event-card">
 
+    <router-link class="back-btn" title="Назад" v-bind:to="'/'">
+      <b-button pill  variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
+    </router-link>
+
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="row">
@@ -56,7 +60,7 @@ import EventRegistrationForm from "@/components/EventRegistrationForm";
 
 export default {
   name: "EventCard",
-    components: {
+  components: {
     EventRegistrationForm
   },
   data: function () {
@@ -105,5 +109,10 @@ export default {
 <style scoped>
 .event-card .image img {
   max-width: 100%;
+}
+
+.back-btn {
+  color: black;
+
 }
 </style>
