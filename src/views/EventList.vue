@@ -6,12 +6,12 @@
       <div class="row">
 
         <div class="card  col-12 col-md-6 col-lg-4" v-for="event in events" :key="event.course_id">
-          <router-link v-if="event.image" v-bind:to="'contest/' + event.course_id">
+          <router-link v-if="event.image" v-bind:to="'event/' + event.course_id">
             <img class="card-img-top" v-bind:src="event.image" alt="Card image cap">
           </router-link>
 
           <div class="card-body d-flex flex-column">
-            <router-link v-bind:to="'contest/' + event.course_id">
+            <router-link v-bind:to="'event/' + event.course_id">
               <h5 class="card-title">{{ event.fullname }}</h5>
             </router-link>
 
@@ -29,7 +29,7 @@
             </p>
 
             <div class="mt-auto">
-              <router-link v-bind:to="'contest/' + event.course_id">
+              <router-link v-bind:to="'event/' + event.course_id">
                 <button class="btn btn-primary ">
                   Подробнее
                 </button>

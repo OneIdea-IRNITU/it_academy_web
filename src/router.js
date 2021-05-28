@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ContestCard from "@/views/EventCard";
+import EventCard from "@/views/EventCard";
 import EventList from "@/views/EventList";
 import {publicPath} from "../vue.config";
 
@@ -15,8 +15,8 @@ const router = new VueRouter({
             component: EventList
         },
         {
-            path: publicPath + 'contest/:id',
-            component: ContestCard,
+            path: publicPath + 'event/:id',
+            component: EventCard,
         },
         {
             path: publicPath + 'page-not-found',
