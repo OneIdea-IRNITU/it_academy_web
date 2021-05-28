@@ -169,6 +169,9 @@ export default {
       })
     },
     submitForm() {
+      this.form.lastname = this.ucFirst(this.form.lastname)
+      this.form.firstname = this.ucFirst(this.form.firstname)
+      this.form.surname = this.ucFirst(this.form.surname)
       const data = JSON.stringify(this.form);
       axios.post('https://open.istu.edu/api/apply.php', data)
           .then((response) => {
@@ -182,6 +185,10 @@ export default {
             console.log(error);
           });
     },
+    ucFirst(str) {
+      if (!str) return str;
+      return str[0].toUpperCase() + str.slice(1);
+    }
   }
 }
 </script>
