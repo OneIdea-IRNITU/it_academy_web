@@ -25,7 +25,7 @@
           </div>
 
           <div class="mt-auto">
-            <button type="button" class="btn btn-primary mt-3 btn-lg">Подавть заявку</button>
+            <EventRegistrationForm/>
           </div>
         </div>
 
@@ -52,9 +52,13 @@
 
 <script>
 import axios from "axios";
+import EventRegistrationForm from "@/components/EventRegistrationForm";
 
 export default {
   name: "EventCard",
+    components: {
+    EventRegistrationForm
+  },
   data: function () {
     return {
       loading: true,
