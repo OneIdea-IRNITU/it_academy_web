@@ -2,21 +2,15 @@
   <div>
     <b-button v-b-modal.modal-prevent-closing variant="primary" class="btn-lg">Подавть заявку</b-button>
 
-    <div class="mt-3">
-      Submitted Names:
-      <div v-if="submittedNames.length === 0">--</div>
-      <ul v-else class="mb-0 pl-3">
-        <li v-for="name in submittedNames" :key="name">{{ name }}</li>
-      </ul>
-    </div>
-
     <b-modal
         id="modal-prevent-closing"
         ref="modal"
-        title="Submit Your Name"
+        title="Регистрация на мероприятие"
         @show="resetModal"
         @hidden="resetModal"
         @ok="handleOk"
+        ok-only
+        ok-title="Отправить"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
@@ -178,83 +172,5 @@ export default {
 }
 </script>
 
-<!--<template>-->
-
-<!--  <div>-->
-
-<!--    <b-button v-b-modal.modal-center variant="primary" class="btn-lg">Подавть заявку</b-button>-->
-
-<!--    <b-modal id="modal-center"-->
-<!--             ref="modal"-->
-<!--             centered-->
-<!--             title="Регистрация на мероприятие"-->
-<!--             @show="resetModal"-->
-<!--             @hidden="resetModal"-->
-<!--             @ok="handleOk"-->
-<!--    >-->
-
-<!--<b-form ref="form" @submit.stop.prevent="handleSubmit" id="eventRegistrationForm">-->
-
-
-<!--        &lt;!&ndash;        <b-button @click="handleOk" variant="primary" block>Регистрация</b-button>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <b-button @click="handleOk" class="mt-4" variant="primary" block>Submit</b-button>&ndash;&gt;-->
-
-
-<!--      </b-form>-->
-<!--    </b-modal>-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  name: "EventRegistrationForm",-->
-<!--  data: function () {-->
-<!--    return {-->
-
-<!--    }-->
-
-<!--  },-->
-<!--  methods: {-->
-<!--    checkFormValidity() {-->
-<!--      const valid = this.$refs.form.checkValidity()-->
-<!--      this.nameState = valid-->
-<!--      return valid-->
-<!--    },-->
-<!--    resetModal() {-->
-<!--      this.name = ''-->
-<!--      this.nameState = null-->
-<!--    },-->
-<!--    handleOk(bvModalEvt) {-->
-<!--      // Prevent modal from closing-->
-<!--      bvModalEvt.preventDefault()-->
-<!--      // Trigger submit handler-->
-<!--      this.handleSubmit()-->
-<!--      this.$refs.form.submit();-->
-
-<!--    },-->
-<!--    handleSubmit() {-->
-<!--      if (!this.checkFormValidity()) {-->
-<!--        return-->
-<!--      }-->
-<!--      this.$nextTick(() => {-->
-<!--        this.$bvModal.hide('modal-prevent-closing')-->
-<!--      })-->
-
-<!--      alert(JSON.stringify(this.form))-->
-
-<!--      this.flashMessage.success({-->
-<!--        title: 'Вы успешно зарегистрировались',-->
-<!--        message: 'Ждем вас на мероприятии!'-->
-<!--      });-->
-
-
-<!--    },-->
-<!--  }-->
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--</style>-->
 
 
