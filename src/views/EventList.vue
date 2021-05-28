@@ -6,8 +6,8 @@
       <div class="row">
 
         <div class="card  col-12 col-md-6 col-lg-4" v-for="event in events" :key="event.course_id">
-          <router-link v-if="event.image" v-bind:to="'event/' + event.course_id">
-            <img class="card-img-top" v-bind:src="event.image" alt="Card image cap">
+          <router-link  v-bind:to="'event/' + event.course_id">
+            <img class="card-img-top" v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')" alt="Card image cap">
           </router-link>
 
           <div class="card-body d-flex flex-column">
