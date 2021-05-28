@@ -83,6 +83,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -159,15 +161,27 @@ export default {
         return
       }
 
-      this.flashMessage.success({
-        title: 'Вы успешно зарегистрировались',
-        message: 'Ждем вас на мероприятии!'
-      });
+      this.submitForm()
+
 
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')
       })
-    }
+    },
+    submitForm() {
+      const data = JSON.stringify(this.form);
+      axios.post('https://open.istu.edu/api/apply.php', data)
+          .then((response) => {
+            this.flashMessage.success({
+              title: 'Вы успешно зарегистрировались',
+              message: response.data
+            });
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
   }
 }
 </script>
