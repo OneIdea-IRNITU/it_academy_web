@@ -173,7 +173,7 @@ export default {
       axios.post('https://open.istu.edu/api/apply.php', data)
           .then((response) => {
             this.flashMessage.success({
-              title: 'Вы успешно зарегистрировались',
+              title: 'Заявка успешно отправлена',
               message: response.data
             });
             console.log(response);
