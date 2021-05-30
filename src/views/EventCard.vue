@@ -1,7 +1,7 @@
 <template>
   <div class="event-card">
 
-    <router-link class="back-btn" title="Назад" :to="{name: 'EventList'}">
+    <router-link class="back-btn" title="Назад" v-bind:to="{name: 'EventList'}">
       <b-button pill variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
     </router-link>
 
