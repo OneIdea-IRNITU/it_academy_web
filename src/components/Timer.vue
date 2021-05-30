@@ -10,9 +10,9 @@
       Minutes: {{ minutes | formatTime }} <br/>
       Seconds: {{ seconds | formatTime }} <br/>
 
-      <span v-if="FinalCompare">
+      <span v-if="!FinalComparefinc()">
         <br/>
-        Осталось: <span v-if="FinalComparefinc">{{ days }}</span> дней<br />
+        Осталось: <span v-if="days">{{ days }}</span> дней<br />
       </span>
      </div>
     <!-- <div class="text-center" v-if="!currentTime">
@@ -33,7 +33,7 @@
       FinalCompare -->
 
 
-    <div class="text-center" v-if="FinalComparefinc" :load="log(FinalComparefinc)">
+    <div class="text-center" v-if="FinalComparefinc()" :load="log(FinalComparefinc)">
         Уже сегодня! <br/>
         <span v-if="days">{{ days }}:</span
         ><span v-if="days">{{ hours | formatTime }}:</span><span>{{ minutes | formatTime }}:{{ seconds | formatTime }}</span><br />
@@ -47,7 +47,7 @@ export default {
     deadline: {
       type: String,
     //   В дефолт вписываем значение "Y-M-D", либо "Y-М-DTH:M:S"
-      default: "2021-06-30",
+      default: "2021-05-29T22:00:00",
     //   Раскомментить, после оформления подсоса времени с базы
     //   required: true,
     },
@@ -70,6 +70,11 @@ export default {
       nowYear: (new Date()).getFullYear(),
 
       isExactYear: Boolean,
+      isExactMonth: Boolean,
+      isExactDay: Boolean,
+
+      FirstCompare: Boolean,
+      FinalCompare: Boolean,
     };
   },
   mounted() {
@@ -102,15 +107,6 @@ export default {
     // FirstCompare(){
     //    return this.isExactYear === this.isExactMonth
     // },
-    FinalComparefinc(){
-      this.isExactYear = (this.deadlineYear === this.nowYear)
-    //   this.isExactMonth = this.deadlineMonth === this.nowMonth
-    //   this.isExactDay = this.deadlineDay === this.nowDay
-    
-    //   this.FirstCompare = this.isExactYear === this.isExactMonth
-    //   this.FinalCompare = this.FirstCompare === this.isExactDay
-      return this.FinalCompare
-    }
   },
 
   filters: {
@@ -135,6 +131,20 @@ export default {
     },
     compare(a, b) {
         return a === b
+    },
+    FinalComparefinc(){
+      this.isExactYear = (this.deadlineYear === this.nowYear)
+      console.log(this.isExactYear)
+      this.isExactMonth = this.deadlineMonth === this.nowMonth
+      console.log(this.isExactMonth)
+      this.isExactDay = this.deadlineDay === this.nowDay
+      console.log(this.isExactDay)
+    
+      this.FirstCompare = this.isExactYear && this.isExactMonth
+      console.log(this.FirstCompare)
+      this.FinalCompare = this.FirstCompare && this.isExactDay
+      console.log(this.FinalCompare)
+      return this.FinalCompare
     }
   }
 }
