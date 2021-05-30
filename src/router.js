@@ -12,7 +12,8 @@ const router = new VueRouter({
     routes: [
         {
             path: publicPath,
-            component: EventList
+            component: EventList,
+            name: 'EventList'
         },
         {
             path: publicPath + 'event/:id',
