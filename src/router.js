@@ -19,10 +19,15 @@ const router = new VueRouter({
             path: publicPath + 'event/:id',
             component: EventCard,
         },
+
         {
-            path: publicPath + 'page-not-found',
-            alias: '*',
+            path: publicPath + '404',
+            name: '404',
             component: {render: (h) => h("div", ["404! Page Not Found!"])},
+        },
+        {
+            path:'*',
+            redirect: {name: 'EventList'},
         },
     ]
 })
