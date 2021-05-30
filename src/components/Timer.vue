@@ -47,7 +47,7 @@ export default {
     deadline: {
       type: String,
     //   В дефолт вписываем значение "Y-M-D", либо "Y-М-DTH:M:S"
-      default: "2021-05-29T22:00:00",
+      default: "2021-05-31T22:00:00",
     //   Раскомментить, после оформления подсоса времени с базы
     //   required: true,
     },
@@ -129,21 +129,13 @@ export default {
     log(item) {
       console.log(item)
     },
-    compare(a, b) {
-        return a === b
-    },
     FinalComparefinc(){
       this.isExactYear = (this.deadlineYear === this.nowYear)
-      console.log(this.isExactYear)
       this.isExactMonth = this.deadlineMonth === this.nowMonth
-      console.log(this.isExactMonth)
       this.isExactDay = this.deadlineDay === this.nowDay
-      console.log(this.isExactDay)
     
       this.FirstCompare = this.isExactYear && this.isExactMonth
-      console.log(this.FirstCompare)
       this.FinalCompare = this.FirstCompare && this.isExactDay
-      console.log(this.FinalCompare)
       return this.FinalCompare
     }
   }
