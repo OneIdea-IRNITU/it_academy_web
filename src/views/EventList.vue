@@ -4,7 +4,15 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="row">
+        <div class="col-md-2 mb-3">
+          <b-form-select
+              v-model="dateFilter"
+              :options="dateFilters"
+          ></b-form-select>
 
+        </div>
+      </div>
+      <div class="row">
         <div class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
           <div class="event__img">
             <router-link v-bind:to="'event/' + event.course_id">
@@ -41,8 +49,6 @@
             </div>
           </div>
         </div>
-
-
       </div>
 
     </div>
@@ -58,7 +64,11 @@ export default {
     return {
       loading: true,
       errored: false,
-      dateFilter: '',
+      dateFilter: 'upcoming',
+      dateFilters: [
+        {text: 'Предстоит', value: 'upcoming'},
+        {text: 'Прошло', value: 'past'}
+      ],
       events: [{
         category: null,
         course_id: null,
@@ -75,23 +85,26 @@ export default {
     sortedEvents() {
       let now = new Date();
       let dateFilter = this.dateFilter
-      return this.events.filter((elem) => {
-        console.log(elem.startdate)
-        let startDate = new Date(elem.startdate * 1000)
 
+      let events = this.events.filter((elem) => {
+        let startDate = new Date(elem.startdate * 1000)
 
         if (dateFilter === 'upcoming') {
           return now < startDate;
         } else if (dateFilter === 'past') {
-          return now <= startDate;
-        } else {
-          return true
+          return now >= startDate;
         }
       }).sort((a, b) => {
-        if (a.startdate > b.startdate) return -1;
+        if (a.startdate > b.startdate) return 1;
         if (a.startdate === b.startdate) return 0;
-        if (a.startdate < b.startdate) return 1;
+        if (a.startdate < b.startdate) return -1;
       })
+
+      if (dateFilter === 'upcoming') {
+        return events
+      } else {
+        return events.reverse()
+      }
     }
   },
   mounted() {
