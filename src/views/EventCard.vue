@@ -1,8 +1,8 @@
 <template>
   <div class="event-card">
 
-    <router-link class="back-btn" title="Назад" v-bind:to="'/'">
-      <b-button pill  variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
+    <router-link class="back-btn" title="Назад" :to="{name: 'EventList'}">
+      <b-button pill variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
     </router-link>
 
     <div v-if="loading">Loading...</div>
@@ -99,6 +99,10 @@ export default {
         })
         .catch(error => {
           console.log(error);
+          if (error.response.status === 404) {
+            this.$router.push({name: '404'});
+          }
+
           this.errored = true;
         })
         .finally(() => (this.loading = false));
