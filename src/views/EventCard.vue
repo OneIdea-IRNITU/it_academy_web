@@ -1,7 +1,7 @@
 <template>
   <div class="event-card">
 
-    <router-link class="back-btn" title="Назад" v-bind:to="{name: 'EventList'}">
+    <router-link class="back-btn" title="Назад" v-bind:to=publicPath>
       <b-button pill variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
     </router-link>
 
@@ -57,6 +57,7 @@
 <script>
 import axios from "axios";
 import EventRegistrationForm from "@/components/EventRegistrationForm";
+import {publicPath} from "../../vue.config";
 
 export default {
   name: "EventCard",
@@ -67,6 +68,7 @@ export default {
     return {
       loading: true,
       errored: false,
+      publicPath: publicPath,
       event: {
         course_id: null,
         fullname: null,
