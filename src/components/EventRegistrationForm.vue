@@ -91,7 +91,10 @@
               :state="consentState"
               required
           >
-            Даю согласие на обработку персональных данных
+            Даю
+            <ConsentToPersonalData linkText="согласие"/>
+            на обработку персональных данных
+
           </b-form-checkbox>
         </b-form-group>
 
@@ -103,8 +106,12 @@
 
 <script>
 import axios from "axios";
+import ConsentToPersonalData from "@/components/ConsentToPersonalData"
 
 export default {
+  components: {
+    ConsentToPersonalData
+  },
   data() {
     return {
       form: {
