@@ -75,8 +75,27 @@
               v-model="form.surname"
               placeholder="Введите отчество"
               :state="surnameState"
+              required
           ></b-form-input>
         </b-form-group>
+        <b-form-group
+            id="input-group-5"
+            label-for="checkbox-1"
+            invalid-feedback="Обязательное поле"
+            :state="consentState"
+        >
+          <b-form-checkbox
+              id="checkbox-1"
+              v-model="form.consent_to_personal_data"
+              name="consentToPersonalData"
+              :state="consentState"
+              required
+          >
+            Даю согласие на обработку персональных данных
+          </b-form-checkbox>
+        </b-form-group>
+
+
       </form>
     </b-modal>
   </div>
@@ -93,11 +112,13 @@ export default {
         lastname: '',
         firstname: '',
         surname: '',
+        consent_to_personal_data: false
       },
       lastnameState: null,
       firstnameState: null,
       surnameState: null,
       emailState: null,
+      consentState: null,
 
       name: '',
       nameState: null,
@@ -136,6 +157,13 @@ export default {
         } else {
           this.surnameState = true
         }
+
+        if (!this.form.consent_to_personal_data) {
+          this.consentState = false
+        } else {
+          this.consentState = true
+        }
+
       }
 
       return valid
@@ -145,12 +173,14 @@ export default {
         lastname: '',
         firstname: '',
         surname: '',
-        email: ''
+        email: '',
+        consent_to_personal_data: false
       }
       this.lastnameState = null
       this.firstnameState = null
       this.surnameState = null
       this.emailState = null
+      this.consentState = null
     },
     handleOk(bvModalEvt) {
       bvModalEvt.preventDefault()
