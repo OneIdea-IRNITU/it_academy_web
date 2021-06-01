@@ -4,8 +4,16 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="row">
+        <div class="col-md-2 mb-3">
+          <b-form-select
+              v-model="dateFilter"
+              :options="dateFilters"
+          ></b-form-select>
 
-        <div class="card  col-12 col-md-6 col-lg-4" v-for="event in events" :key="event.course_id">
+        </div>
+      </div>
+      <div class="row">
+        <div class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
           <div class="event__img">
             <router-link v-bind:to="'event/' + event.course_id">
               <img class="card-img-top"
@@ -28,8 +36,8 @@
                 <path
                     d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
               </svg>
-              <span class="startdate"> {{ event.startdate }}</span>
-              <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
+              <span class="startdate"> {{ event.startdate_formatted }}</span>
+              <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
             </p>
 
             <div class="mt-auto">
@@ -41,8 +49,6 @@
             </div>
           </div>
         </div>
-
-
       </div>
 
     </div>
@@ -58,6 +64,11 @@ export default {
     return {
       loading: true,
       errored: false,
+      dateFilter: 'upcoming',
+      dateFilters: [
+        {text: 'Предстоит', value: 'upcoming'},
+        {text: 'Прошло', value: 'past'}
+      ],
       events: [{
         category: null,
         course_id: null,
@@ -70,7 +81,32 @@ export default {
       }],
     }
   },
-  computed: {},
+  computed: {
+    sortedEvents() {
+      let now = new Date();
+      let dateFilter = this.dateFilter
+
+      let events = this.events.filter((elem) => {
+        let startDate = new Date(elem.startdate * 1000)
+
+        if (dateFilter === 'upcoming') {
+          return now < startDate;
+        } else if (dateFilter === 'past') {
+          return now >= startDate;
+        }
+      }).sort((a, b) => {
+        if (a.startdate > b.startdate) return 1;
+        if (a.startdate === b.startdate) return 0;
+        if (a.startdate < b.startdate) return -1;
+      })
+
+      if (dateFilter === 'upcoming') {
+        return events
+      } else {
+        return events.reverse()
+      }
+    }
+  },
   mounted() {
     axios
         .get('https://open.istu.edu/api/get_all_events.php')
@@ -80,12 +116,12 @@ export default {
 
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
-                  event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+                  event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
                 }
                 if (event.enddate > 0) {
                   let enddate = new Date(event.enddate * 1000)
-                  event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+                  event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
                 }
 
                 events.push(event)
@@ -106,7 +142,7 @@ export default {
 <style scoped>
 
 .event__img {
-  padding-top: 10px ;
+  padding-top: 10px;
   min-height: 220px;
   display: flex;
   justify-content: center;
