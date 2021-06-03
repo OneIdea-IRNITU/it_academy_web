@@ -1,20 +1,17 @@
 <template>
   <div>
-    <div class="text-center" v-if="currentTime">
-      <span v-if="days">
-        Days: {{ days }}<br/>
-      </span>
-      <span v-if="hours">
-        Hours: {{ hours | formatTime }} <br/>
-      </span>
-      Minutes: {{ minutes | formatTime }} <br/>
-      Seconds: {{ seconds | formatTime }} <br/>
-
+    <div v-if="currentTime">
       <span v-if="!FinalComparefinc()">
-        <br/>
         Осталось: <span v-if="days">{{ days }}</span> дней<br />
       </span>
      </div>
+
+     <div v-if="!currentTime">
+       <span>
+      Уже прошло!<br/>
+      </span>
+     </div>
+
     <!-- <div class="text-center" v-if="!currentTime">
       Уже сегодня!
     </div> -->
@@ -33,7 +30,7 @@
       FinalCompare -->
 
 
-    <div class="text-center" v-if="FinalComparefinc()" :load="log(FinalComparefinc)">
+    <div v-if="FinalComparefinc()" :load="log(FinalComparefinc)">
         Уже сегодня! <br/>
         <span v-if="days">{{ days }}:</span
         ><span v-if="days">{{ hours | formatTime }}:</span><span>{{ minutes | formatTime }}:{{ seconds | formatTime }}</span><br />
@@ -42,12 +39,17 @@
 </template>
 
 <script>
+
+import data from '@/views/EventCard' // Import from the js location
+
+
+
 export default {
   props: {
     deadline: {
       type: String,
     //   В дефолт вписываем значение "Y-M-D", либо "Y-М-DTH:M:S"
-      default: "2021-05-31T22:00:00",
+      default: data,
     //   Раскомментить, после оформления подсоса времени с базы
     //   required: true,
     },
@@ -75,6 +77,7 @@ export default {
 
       FirstCompare: Boolean,
       FinalCompare: Boolean,
+      data: data,
     };
   },
   mounted() {
@@ -140,6 +143,5 @@ export default {
     }
   }
 }
-
 </script>
 

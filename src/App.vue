@@ -6,7 +6,6 @@
         <router-view/>
       </div>
     </div>
-    <Timer/>
     <Footer/>
   </div>
 </template>
@@ -14,13 +13,12 @@
 <script>
 
 import Footer from "@/components/Footer";
-import Timer from "@/components/Timer";
+
 
 export default {
   name: 'App',
   components: {
     Footer,
-    Timer
   }
 }
 </script>

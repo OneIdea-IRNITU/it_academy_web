@@ -25,6 +25,7 @@
           </div>
 
           <div class="organizers">Организатор:
+            <Timer/>
             <a class="organizer-items">{{ event.organizers }}</a>
           </div>
 
@@ -56,12 +57,16 @@
 
 <script>
 import axios from "axios";
+import Timer from "@/components/Timer";
 import EventRegistrationForm from "@/components/EventRegistrationForm";
+
 
 export default {
   name: "EventCard",
+  eventdata: "event",
   components: {
-    EventRegistrationForm
+    EventRegistrationForm,
+    Timer
   },
   data: function () {
     return {
