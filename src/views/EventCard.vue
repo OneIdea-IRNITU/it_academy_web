@@ -63,7 +63,6 @@ import EventRegistrationForm from "@/components/EventRegistrationForm";
 
 export default {
   name: "EventCard",
-  eventdata: "event",
   components: {
     EventRegistrationForm,
     Timer
@@ -93,12 +92,12 @@ export default {
 
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
-            this.event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+            this.event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace(':00', '')
 
           }
           if (this.event.enddate > 0) {
             let enddate = new Date(this.event.enddate * 1000)
-            this.event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+            this.event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace(':00', '')
           }
 
         })

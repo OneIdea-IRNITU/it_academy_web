@@ -8,7 +8,7 @@
 
      <div v-if="!currentTime">
        <span>
-      Уже прошло!<br/>
+      Уже прошло<br/>
       </span>
      </div>
 
@@ -40,8 +40,9 @@
 
 <script>
 
-import data from '@/views/EventCard' // Import from the js location
+import axios from "axios";
 
+let timez;
 
 
 export default {
@@ -49,7 +50,7 @@ export default {
     deadline: {
       type: String,
     //   В дефолт вписываем значение "Y-M-D", либо "Y-М-DTH:M:S"
-      default: data,
+      default: timez,
     //   Раскомментить, после оформления подсоса времени с базы
     //   required: true,
     },
@@ -75,13 +76,75 @@ export default {
       isExactMonth: Boolean,
       isExactDay: Boolean,
 
+      stack: '',
+      unstack: '',
+      cut: '',
+      cutFull: '',
+
       FirstCompare: Boolean,
       FinalCompare: Boolean,
-      data: data,
+      data: timez,
+      event: {
+        course_id: null,
+        fullname: null,
+        category: null,
+        startdate: null,
+        enddate: null,
+        description: null,
+        image: null,
+        organizers: null,
+      },
     };
   },
   mounted() {
     setTimeout(this.countdown, 1000);
+    
+    axios
+      .get('https://open.istu.edu/api/get_all_events.php?course_id=' + this.$route.params.id)
+      .then(response => {
+        this.event = response.data[0]
+
+        if (this.event.startdate > 0) {
+          let startdate = new Date(this.event.startdate * 1000)
+          this.timez = startdate.toLocaleString().slice(0, -3).replace(/\//g, '-').replace(/, /g,"T");
+  
+          // Приводим к формату Y-М-DTH:M:S
+          let i = 0;
+          while (this.timez[i] !== 'T'){
+            this.stack += this.timez[i];
+              i++;
+          }
+          this.stack = this.stack.split("").reverse().join("")+'-';
+          console.log(this.stack);
+
+          for(i = 0;i<=this.stack.length;i++){
+            if(this.stack[i] !== '-'){
+              this.cut += this.stack[i]
+            }else{
+              this.cutFull += this.cut.split("").reverse().join("") + '-'
+              this.cut = ''
+            }
+          }
+          this.cutFull = this.cutFull.slice(0,-1)
+          this.unstack = this.timez.slice(this.stack.length, this.timez.length)
+          this.timez = this.cutFull + 'T' + this.unstack
+
+          console.log(this.timez);
+
+
+
+        }
+        if (this.event.enddate > 0) {
+          let enddate = new Date(this.event.enddate * 1000)
+          this.event.enddate = enddate.toLocaleString().slice(0, -3).replace(/-/g,"-").replace(/, /g,"T");
+        }
+
+      })
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      })
+      .finally(() => (this.loading = false));
   },
   computed: {
     seconds() {
@@ -140,7 +203,7 @@ export default {
       this.FirstCompare = this.isExactYear && this.isExactMonth
       this.FinalCompare = this.FirstCompare && this.isExactDay
       return this.FinalCompare
-    }
+    },
   }
 }
 </script>
