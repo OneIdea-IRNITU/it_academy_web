@@ -3,9 +3,15 @@
     <h1>Список мероприятий</h1>
     <div v-if="loading">Loading...</div>
     <div v-else>
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6">
+          <b-form-input type="search" v-model="searchText" placeholder="Поиск..."></b-form-input>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-2 mb-3">
           <b-form-select
+              :disabled="useFilters"
               v-model="dateFilter"
               :options="dateFilters"
           ></b-form-select>
@@ -13,7 +19,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
+        <div v-if="!sortedEvents.length">
+          <div class="col">
+            <p>Ничего не нашли</p>
+          </div>
+        </div>
+        <div v-else class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
           <div class="event__img">
             <router-link v-bind:to="'event/' + event.course_id">
               <img class="card-img-top"
@@ -50,8 +61,8 @@
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
 </template>
 
@@ -65,6 +76,7 @@ export default {
       loading: true,
       errored: false,
       dateFilter: 'upcoming',
+      searchText: '',
       dateFilters: [
         {text: 'Предстоит', value: 'upcoming'},
         {text: 'Прошло', value: 'past'}
@@ -82,29 +94,56 @@ export default {
     }
   },
   computed: {
+    useFilters() {
+      let searchText = this.searchText.toLowerCase()
+      if (searchText) {
+        return true
+      } else {
+        return false
+      }
+    },
     sortedEvents() {
       let now = new Date();
       let dateFilter = this.dateFilter
+      let searchText = this.searchText.toLowerCase()
+
 
       let events = this.events.filter((elem) => {
-        let startDate = new Date(elem.startdate * 1000)
+        if (searchText) {
+          return elem.fullname.toLowerCase().includes(searchText) || elem.organizers.toLowerCase().includes(searchText)
+        } else {
+          let startDate = new Date(elem.startdate * 1000)
 
-        if (dateFilter === 'upcoming') {
-          return now < startDate;
-        } else if (dateFilter === 'past') {
-          return now >= startDate;
+          if (dateFilter === 'upcoming') {
+            return now < startDate;
+          } else if (dateFilter === 'past') {
+            return now >= startDate;
+          }
         }
       }).sort((a, b) => {
-        if (a.startdate > b.startdate) return 1;
-        if (a.startdate === b.startdate) return 0;
-        if (a.startdate < b.startdate) return -1;
-      })
+        let aStartDate = new Date(a.startdate * 1000)
+        let bStartDate = new Date(b.startdate * 1000)
 
-      if (dateFilter === 'upcoming') {
-        return events
-      } else {
-        return events.reverse()
-      }
+        // сначала, актуальные
+        if (aStartDate > now && bStartDate <= now) return -1;
+        if (aStartDate <= now && bStartDate > now) return 1;
+
+        //если актуальные мероприятие
+        if (aStartDate > now && bStartDate > now) {
+          if (a.startdate > b.startdate) return 1;
+          if (a.startdate === b.startdate) return 0;
+          if (a.startdate < b.startdate) return -1;
+        }
+
+        //если прошедшие мероприятие
+        if (aStartDate <= now && bStartDate <= now) {
+          if (a.startdate > b.startdate) return -1;
+          if (a.startdate === b.startdate) return 0;
+          if (a.startdate < b.startdate) return 1;
+        }
+
+      })
+      return events
     }
   },
   mounted() {
