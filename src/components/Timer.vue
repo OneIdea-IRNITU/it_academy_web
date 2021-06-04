@@ -52,7 +52,7 @@ export default {
     //   В дефолт вписываем значение "Y-M-D", либо "Y-М-DTH:M:S"
       default: timez,
     //   Раскомментить, после оформления подсоса времени с базы
-    //   required: true,
+      // required: true,
     },
     speed: {
       type: Number,
@@ -80,10 +80,12 @@ export default {
       unstack: '',
       cut: '',
       cutFull: '',
+      rotateDayToMonth:'',
+      rotateDayToYear:'',
 
       FirstCompare: Boolean,
       FinalCompare: Boolean,
-      data: timez,
+      timez: '',
       event: {
         course_id: null,
         fullname: null,
@@ -114,22 +116,35 @@ export default {
             this.stack += this.timez[i];
               i++;
           }
-          this.stack = this.stack.split("").reverse().join("")+'-';
-          console.log(this.stack);
+          this.stack = this.stack.split("").reverse().join("");
+          this.rotateDayToMonth = this.stack.slice(5, this.stack.length).split("").reverse().join("")
+          this.rotateDayToYear = this.stack.slice(0, 5)
+          this.stack = this.rotateDayToYear + this.rotateDayToMonth +'-'
 
           for(i = 0;i<=this.stack.length;i++){
             if(this.stack[i] !== '-'){
               this.cut += this.stack[i]
             }else{
-              this.cutFull += this.cut.split("").reverse().join("") + '-'
-              this.cut = ''
+              if (this.cut.length === 1){
+                this.cut = '0'+ this.cut;
+              }
+              if (this.cut.length === 4){
+                this.cutFull += this.cut.split("").reverse().join("") + '-'
+                this.cut = ''
+              }else{
+                this.cutFull += this.cut + '-'
+                this.cut = ''
+              }
             }
           }
           this.cutFull = this.cutFull.slice(0,-1)
           this.unstack = this.timez.slice(this.stack.length, this.timez.length)
           this.timez = this.cutFull + 'T' + this.unstack
-
+          
           console.log(this.timez);
+
+
+        
 
 
 
@@ -170,9 +185,6 @@ export default {
     isExactDayfunc(){
        return this.deadlineDay === this.nowDay
     },
-    // FirstCompare(){
-    //    return this.isExactYear === this.isExactMonth
-    // },
   },
 
   filters: {
