@@ -19,39 +19,46 @@
         </div>
       </div>
       <div class="row">
-        <div class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
-          <div class="event__img">
-            <router-link v-bind:to="'event/' + event.course_id">
-              <img class="card-img-top"
-                   v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
-                   alt="Card image cap">
-            </router-link>
+        <div v-if="!sortedEvents.length">
+          <div class="col">
+            <p>Ничего не нашли</p>
           </div>
-
-          <div class="card-body d-flex flex-column">
-            <router-link v-bind:to="'event/' + event.course_id">
-              <h5 class="card-title">{{ event.fullname }}</h5>
-            </router-link>
-
-            <a class="category">#{{ event.category }}</a>
-
-            <p class="card-text">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                   class="bi bi-calendar-event" viewBox="0 0 16 16">
-                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
-                <path
-                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-              </svg>
-              <span class="startdate"> {{ event.startdate_formatted }}</span>
-              <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
-            </p>
-
-            <div class="mt-auto">
+        </div>
+        <div v-else>
+          <div class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
+            <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
-                <button class="btn btn-primary ">
-                  Подробнее
-                </button>
+                <img class="card-img-top"
+                     v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
+                     alt="Card image cap">
               </router-link>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+              <router-link v-bind:to="'event/' + event.course_id">
+                <h5 class="card-title">{{ event.fullname }}</h5>
+              </router-link>
+
+              <a class="category">#{{ event.category }}</a>
+
+              <p class="card-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-calendar-event" viewBox="0 0 16 16">
+                  <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                  <path
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                </svg>
+                <span class="startdate"> {{ event.startdate_formatted }}</span>
+                <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
+              </p>
+
+              <div class="mt-auto">
+                <router-link v-bind:to="'event/' + event.course_id">
+                  <button class="btn btn-primary ">
+                    Подробнее
+                  </button>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>
