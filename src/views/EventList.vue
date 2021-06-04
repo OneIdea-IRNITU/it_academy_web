@@ -116,17 +116,29 @@ export default {
           }
         }
       }).sort((a, b) => {
-        if (a.startdate > b.startdate) return 1;
-        if (a.startdate === b.startdate) return 0;
-        if (a.startdate < b.startdate) return -1;
+        let aStartDate = new Date(a.startdate * 1000)
+        let bStartDate = new Date(b.startdate * 1000)
+
+        // сначала, актуальные
+        if (aStartDate > now && bStartDate <= now) return -1;
+        if (aStartDate <= now && bStartDate > now) return 1;
+
+        //если актуальные мероприятие
+        if (aStartDate > now && bStartDate > now) {
+          if (a.startdate > b.startdate) return 1;
+          if (a.startdate === b.startdate) return 0;
+          if (a.startdate < b.startdate) return -1;
+        }
+
+        //если прошедшие мероприятие
+        if (aStartDate <= now && bStartDate <= now) {
+          if (a.startdate > b.startdate) return -1;
+          if (a.startdate === b.startdate) return 0;
+          if (a.startdate < b.startdate) return 1;
+        }
+
       })
-
-
-      if (dateFilter === 'upcoming') {
-        return events
-      } else {
-        return events.reverse()
-      }
+      return events
     }
   },
   mounted() {
