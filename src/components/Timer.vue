@@ -40,21 +40,18 @@
 
 <script>
 
-import axios from "axios";
-
-
 export default {
   props: {
-    // event: {
-    //     course_id: null,
-    //     fullname: null,
-    //     category: null,
-    //     startdate: null,
-    //     enddate: null,
-    //     description: null,
-    //     image: null,
-    //     organizers: null,
-    //   },
+    event: {
+        course_id: null,
+        fullname: null,
+        category: null,
+        startdate: null,
+        enddate: null,
+        description: null,
+        image: null,
+        organizers: null,
+      },
   },
   data() {
     return {
@@ -91,18 +88,13 @@ export default {
     };
   },
   mounted() {
-    setTimeout(this.countdown, 1000);
+    setTimeout(this.countdown, 10);
     
-    axios
-      .get('https://open.istu.edu/api/get_all_events.php?course_id=' + this.$route.params.id)
-      .then(response => {
-        this.event = response.data[0]
 
-        if (this.event.startdate > 0) {
-          let startdate = new Date(this.event.startdate * 1000)
-          this.timez = startdate.toLocaleString().slice(0, -3).replace(/\//g, '-').replace(/, /g,"T");
-  
-          // Приводим к формату Y-М-DTH:M:S
+        this.timez = String(this.event.startdate).replace(/\//g, '-').replace(/ /g,"T")+':00';
+
+        // Приводим к формату Y-М-DTH:M:S
+
           let i = 0;
           while (this.timez[i] !== 'T'){
             this.stack += this.timez[i];
@@ -134,25 +126,13 @@ export default {
           this.timez = this.cutFull + 'T' + this.unstack
 
           this.deadline = this.timez;
+ 
           
           console.log(this.timez);
-          console.log(this.timez);
 
 
 
-        }
-        if (this.event.enddate > 0) {
-          let enddate = new Date(this.event.enddate * 1000)
-          this.event.enddate = enddate.toLocaleString().slice(0, -3).replace(/-/g,"-").replace(/, /g,"T");
-        }
-
-      })
-      .catch(error => {
-        console.log(error);
-        this.errored = true;
-      })
-      .finally(() => (this.loading = false));
-  },
+      },
   computed: {
     seconds() {
       return Math.floor((this.currentTime / 1000) % 60);

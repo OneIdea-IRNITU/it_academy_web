@@ -25,7 +25,7 @@
           </div>
 
           <div class="organizers">Организатор:
-            <Timer/>
+            <Timer :event="event" />
             <a class="organizer-items">{{ event.organizers }}</a>
           </div>
 
