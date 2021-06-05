@@ -1,7 +1,7 @@
 <template>
   <div class="event-card">
 
-    <router-link class="back-btn" title="Назад" v-bind:to=publicPath>
+    <router-link class="back-btn" title="Назад" :to="{path:publicPath}">
       <b-button pill variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
     </router-link>
 
@@ -25,7 +25,9 @@
           </div>
 
           <div class="organizers">Организатор:
-            <a class="organizer-items">{{ event.organizers }}</a>
+            <router-link class="back-btn" :to="{path:publicPath, query:{searchText:event.organizers}}">
+              <span class="organizer-items">{{ event.organizers }}</span>
+            </router-link>
           </div>
 
           <div class="mt-auto">

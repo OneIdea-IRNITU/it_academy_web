@@ -8,12 +8,12 @@ Vue.use(VueRouter)
 
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
             path: publicPath,
             component: EventList,
-            name: 'EventList'
+            name: 'EventList',
         },
         {
             path: publicPath + 'event/:id',
@@ -26,7 +26,7 @@ const router = new VueRouter({
             component: {render: (h) => h("div", ["404! Page Not Found!"])},
         },
         {
-            path:'*',
+            path: '*',
             redirect: {name: 'EventList'},
         },
     ]
