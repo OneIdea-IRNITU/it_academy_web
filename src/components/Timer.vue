@@ -136,9 +136,7 @@ export default {
           this.deadline = this.timez;
           
           console.log(this.timez);
-
-
-        
+          console.log(this.timez);
 
 
 
