@@ -42,22 +42,19 @@
 
 import axios from "axios";
 
-let timez;
-
 
 export default {
   props: {
-    deadline: {
-      type: String,
-    //   В дефолт вписываем значение "Y-M-D", либо "Y-М-DTH:M:S"
-      default: timez,
-    //   Раскомментить, после оформления подсоса времени с базы
-      // required: true,
-    },
-    speed: {
-      type: Number,
-      default: 1000,
-    },
+    // event: {
+    //     course_id: null,
+    //     fullname: null,
+    //     category: null,
+    //     startdate: null,
+    //     enddate: null,
+    //     description: null,
+    //     image: null,
+    //     organizers: null,
+    //   },
   },
   data() {
     return {
@@ -86,16 +83,11 @@ export default {
       FirstCompare: Boolean,
       FinalCompare: Boolean,
       timez: '',
-      event: {
-        course_id: null,
-        fullname: null,
-        category: null,
-        startdate: null,
-        enddate: null,
-        description: null,
-        image: null,
-        organizers: null,
-      },
+      deadline: null,
+      speed: {
+        type: Number,
+        default: 1000,
+    },
     };
   },
   mounted() {
@@ -140,6 +132,8 @@ export default {
           this.cutFull = this.cutFull.slice(0,-1)
           this.unstack = this.timez.slice(this.stack.length, this.timez.length)
           this.timez = this.cutFull + 'T' + this.unstack
+
+          this.deadline = this.timez;
           
           console.log(this.timez);
 
