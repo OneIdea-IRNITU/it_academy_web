@@ -93,6 +93,11 @@ export default {
       }],
     }
   },
+  created() {
+    if (this.$route.query.searchText) {
+      this.searchText = this.$route.query.searchText;
+    }
+  },
   computed: {
     useFilters() {
       let searchText = this.searchText.toLowerCase()
