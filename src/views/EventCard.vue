@@ -24,10 +24,15 @@
             <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
           </div>
 
-          <div class="organizers">Организатор:
-            <router-link class="back-btn" :to="{path:publicPath, query:{searchText:event.organizers}}">
-              <span class="organizer-items">{{ event.organizers }}</span>
-            </router-link>
+          <div class="organizers">
+            <span class="organizers__title">
+              {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
+            </span>
+            <span v-for="(organizer, index) in event.organizers" :key="index">
+              <router-link class="organizers__link"
+                           :to="{path:publicPath, query:{searchText:organizer}}">
+                {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
+            </span>
           </div>
 
           <div class="mt-auto">
@@ -79,7 +84,7 @@ export default {
         enddate: null,
         description: null,
         image: null,
-        organizers: null,
+        organizers: [],
       },
     }
   },
@@ -89,6 +94,8 @@ export default {
         .get('https://open.istu.edu/api/get_all_events.php?course_id=' + this.$route.params.id)
         .then(response => {
           this.event = response.data[0]
+
+          this.event.organizers = this.event.organizers.split(', ');
 
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
