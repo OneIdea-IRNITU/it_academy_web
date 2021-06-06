@@ -37,16 +37,16 @@
             </div>
 
             <div class="card-body d-flex flex-column">
-              <router-link v-bind:to="'event/' + event.course_id">
+              <router-link class="event__title" v-bind:to="'event/' + event.course_id">
                 <h5 class="card-title">{{ event.fullname }}</h5>
               </router-link>
 
-              <a class="category">#{{ event.category }}</a>
+              <a class="category"><small>#{{ event.category }}</small></a>
 
               <p class="card-text">
                 <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                <span class="startdate"> {{ event.startdate_formatted }}</span>
-                <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
+                <small class="startdate"> {{ event.startdate_formatted }}</small>
+                <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
               </p>
 
               <div class="mt-auto">
@@ -196,6 +196,10 @@ export default {
 
 .event__img img {
   border-radius: 12px 12px 0 0;
+}
+
+.event__title{
+  color: black;
 }
 
 
