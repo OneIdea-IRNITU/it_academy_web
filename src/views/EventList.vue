@@ -5,7 +5,8 @@
     <div v-else>
       <div class="row mt-3 mb-3">
         <div class="col-md-12">
-          <b-form-input class="search" type="search" v-model="searchText" placeholder="Найти мероприятие"></b-form-input>
+          <b-form-input class="search" type="search" v-model="searchText"
+                        placeholder="Найти мероприятие"></b-form-input>
         </div>
       </div>
       <div class="row">
@@ -41,12 +42,7 @@
             <a class="category">#{{ event.category }}</a>
 
             <p class="card-text">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                   class="bi bi-calendar-event" viewBox="0 0 16 16">
-                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
-                <path
-                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-              </svg>
+              <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
               <span class="startdate"> {{ event.startdate_formatted }}</span>
               <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
             </p>
@@ -185,11 +181,11 @@ export default {
 
 <style scoped>
 
-.search{
+.search {
   /*padding: 14px;*/
 }
 
-.search_filters select{
+.search_filters select {
   color: #2185FB;
 }
 
