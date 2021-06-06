@@ -196,6 +196,9 @@ export default {
 
 .event__img img {
   border-radius: 12px 12px 0 0;
+object-fit: cover;
+width: 100%;
+height: 318px;
 }
 
 .event__title{
