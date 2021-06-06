@@ -4,12 +4,12 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="row mt-3 mb-3">
-        <div class="col-md-6">
-          <b-form-input type="search" v-model="searchText" placeholder="Поиск..."></b-form-input>
+        <div class="col-md-12">
+          <b-form-input class="search" type="search" v-model="searchText" placeholder="Найти мероприятие"></b-form-input>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3 search_filters">
           <b-form-select
               :disabled="useFilters"
               v-model="dateFilter"
@@ -185,6 +185,14 @@ export default {
 
 <style scoped>
 
+.search{
+  /*padding: 14px;*/
+}
+
+.search_filters select{
+  color: #2185FB;
+}
+
 .event__img {
   padding-top: 10px;
   min-height: 220px;
@@ -192,4 +200,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+
 </style>
