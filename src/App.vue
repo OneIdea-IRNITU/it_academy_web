@@ -27,7 +27,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -38,18 +38,28 @@ export default {
   background-color: #F0F5FA;
 }
 
-.container{
+.container {
   padding-top: 75px;
 }
+
 .content {
   margin: 0;
   padding: 0;
   min-height: calc(100vh - 96px);
 }
 
-input, select, option{
+.card {
+  border-radius: 12px !important;
+}
+
+input, select, option {
   border-radius: 12px !important;
   min-height: 55px !important;
+}
+
+.btn {
+  border-radius: 12px !important;
+  min-height: 50px !important;
 }
 
 ._vue-flash-msg-body_success {

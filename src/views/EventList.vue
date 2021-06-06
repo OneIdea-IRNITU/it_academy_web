@@ -19,40 +19,45 @@
 
         </div>
       </div>
-      <div class="row">
+      <div class="row ">
         <div v-if="!sortedEvents.length">
           <div class="col">
             <p>Ничего не нашли</p>
           </div>
         </div>
-        <div v-else class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
-          <div class="event__img">
-            <router-link v-bind:to="'event/' + event.course_id">
-              <img class="card-img-top"
-                   v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
-                   alt="Card image cap">
-            </router-link>
-          </div>
 
-          <div class="card-body d-flex flex-column">
-            <router-link v-bind:to="'event/' + event.course_id">
-              <h5 class="card-title">{{ event.fullname }}</h5>
-            </router-link>
-
-            <a class="category">#{{ event.category }}</a>
-
-            <p class="card-text">
-              <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-              <span class="startdate"> {{ event.startdate_formatted }}</span>
-              <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
-            </p>
-
-            <div class="mt-auto">
+        <div v-else class="col-12 col-md-6 col-lg-4 mb-4" v-for="event in sortedEvents" :key="event.course_id">
+          <div class="card h-100 ">
+            <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
-                <button class="btn btn-primary ">
-                  Подробнее
-                </button>
+                <img class="card-img-top"
+                     v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
+                     alt="Card image cap">
               </router-link>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+              <router-link v-bind:to="'event/' + event.course_id">
+                <h5 class="card-title">{{ event.fullname }}</h5>
+              </router-link>
+
+              <a class="category">#{{ event.category }}</a>
+
+              <p class="card-text">
+                <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
+                <span class="startdate"> {{ event.startdate_formatted }}</span>
+                <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
+              </p>
+
+              <div class="mt-auto">
+
+                <router-link v-bind:to="'event/' + event.course_id">
+                  <button class="btn btn-primary col-6">
+                    Подробнее
+                  </button>
+                </router-link>
+
+              </div>
             </div>
           </div>
         </div>
@@ -189,12 +194,8 @@ export default {
   color: #2185FB;
 }
 
-.event__img {
-  padding-top: 10px;
-  min-height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.event__img img {
+  border-radius: 12px 12px 0 0;
 }
 
 
