@@ -34,7 +34,7 @@ export default {
   line-height: 150%;
   color: #000000;
 
-  margin-top: 100px;
+  padding-top: 96px;
   background-color: #F0F5FA;
 }
 

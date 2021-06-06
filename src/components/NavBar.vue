@@ -7,7 +7,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="nav__items">
-          <b-nav-item href="#">Мероприятия</b-nav-item>
+          <b-nav-item href="#" active>Мероприятия</b-nav-item>
           <b-nav-item href="#">Конкурсы</b-nav-item>
           <b-nav-item href="#">Личный кабинет</b-nav-item>
         </b-navbar-nav>
@@ -39,19 +39,12 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
-  min-height: 100px;
-}
 
 
 .nav__items{
   width: 100%;
   display: flex;
   justify-content: center;
-  /*align-content: space-between*/
-}
-.nav-item {
-  margin: 21px 0;
 }
 
 .nav__login__link__text {
