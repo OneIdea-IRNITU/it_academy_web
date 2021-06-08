@@ -24,9 +24,9 @@
             <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
           </div>
 
-          <div class="organizers">Организатор:
-            <Timer :event="event" />
-          <a class="organizer-items">{{ event.organizers }}</a>
+          <!-- <div class="organizers">Организатор: -->
+          <Timer :event="event" />
+          <!-- <a class="organizer-items">{{ event.organizers }}</a> -->
 
 
           <div class="organizers">
@@ -64,7 +64,7 @@
 
     </div>
   </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
