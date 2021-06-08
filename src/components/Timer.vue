@@ -74,8 +74,6 @@ export default {
       unstack: '',
       cut: '',
       cutFull: '',
-      rotateDayToMonth:'',
-      rotateDayToYear:'',
 
       FirstCompare: Boolean,
       FinalCompare: Boolean,
@@ -89,10 +87,9 @@ export default {
   },
   mounted() {
     setTimeout(this.countdown, 10);
-    
 
-        this.timez = String(this.event.startdate).replace(/\//g, '-').replace(/ /g,"T")+':00';
-
+        this.timez = String(this.event.startdate).replace(/\./g,'-').replace(/ /g,'T') + ':00';
+      
         // Приводим к формату Y-М-DTH:M:S
 
           let i = 0;
@@ -100,38 +97,22 @@ export default {
             this.stack += this.timez[i];
               i++;
           }
-          this.stack = this.stack.split("").reverse().join("");
-          this.rotateDayToMonth = this.stack.slice(5, this.stack.length).split("").reverse().join("")
-          this.rotateDayToYear = this.stack.slice(0, 5)
-          this.stack = this.rotateDayToYear + this.rotateDayToMonth +'-'
+          this.stack = this.stack.split("").reverse().join("")+'-';
 
           for(i = 0;i<=this.stack.length;i++){
             if(this.stack[i] !== '-'){
               this.cut += this.stack[i]
             }else{
-              if (this.cut.length === 1){
-                this.cut = '0'+ this.cut;
-              }
-              if (this.cut.length === 4){
-                this.cutFull += this.cut.split("").reverse().join("") + '-'
-                this.cut = ''
-              }else{
-                this.cutFull += this.cut + '-'
-                this.cut = ''
-              }
+              this.cutFull += this.cut.split("").reverse().join("") + '-'
+              this.cut = ''
+  
             }
           }
           this.cutFull = this.cutFull.slice(0,-1)
           this.unstack = this.timez.slice(this.stack.length, this.timez.length)
-          this.timez = this.cutFull + 'T' + this.unstack
+          this.timez = this.cutFull + 'T' + this.unstack;
 
           this.deadline = this.timez;
- 
-          
-          console.log(this.timez);
-
-
-
       },
   computed: {
     seconds() {
