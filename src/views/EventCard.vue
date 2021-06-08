@@ -1,8 +1,8 @@
 <template>
   <div class="event-card">
 
-    <router-link class="back-btn" title="Назад" v-bind:to="'/'">
-      <b-button pill  variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
+    <router-link class="back-btn" title="Назад" :to="{path:publicPath}">
+      <b-button pill variant="light"><span class="back-btn__text">&lt; Назад</span></b-button>
     </router-link>
 
     <div v-if="loading">Loading...</div>
@@ -24,9 +24,16 @@
             <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
           </div>
 
-          <div class="organizers">Организатор:
-            <Timer :event="event" />
-            <a class="organizer-items">{{ event.organizers }}</a>
+          <div class="organizers">
+            <span class="organizers__title">
+              {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
+            </span>
+            <span v-for="(organizer, index) in event.organizers" :key="index">
+              <router-link class="organizers__link"
+                           :to="{path:publicPath, query:{searchText:organizer}}">
+                {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
+            </span>
+            
           </div>
 
           <div class="mt-auto">
@@ -59,6 +66,7 @@
 import axios from "axios";
 import Timer from "@/components/Timer";
 import EventRegistrationForm from "@/components/EventRegistrationForm";
+import {publicPath} from "../../vue.config";
 
 
 export default {
@@ -71,6 +79,7 @@ export default {
     return {
       loading: true,
       errored: false,
+      publicPath: publicPath,
       event: {
         course_id: null,
         fullname: null,
@@ -79,7 +88,7 @@ export default {
         enddate: null,
         description: null,
         image: null,
-        organizers: null,
+        organizers: [],
       },
     }
   },
@@ -89,6 +98,8 @@ export default {
         .get('https://open.istu.edu/api/get_all_events.php?course_id=' + this.$route.params.id)
         .then(response => {
           this.event = response.data[0]
+
+          this.event.organizers = this.event.organizers.split(', ');
 
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
@@ -103,6 +114,10 @@ export default {
         })
         .catch(error => {
           console.log(error);
+          if (error.response.status === 404) {
+            this.$router.push({name: '404'});
+          }
+
           this.errored = true;
         })
         .finally(() => (this.loading = false));
