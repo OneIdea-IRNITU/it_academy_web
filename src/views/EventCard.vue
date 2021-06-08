@@ -24,6 +24,11 @@
             <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
           </div>
 
+          <div class="organizers">Организатор:
+            <Timer :event="event" />
+          <a class="organizer-items">{{ event.organizers }}</a>
+
+
           <div class="organizers">
             <span class="organizers__title">
               {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
@@ -33,7 +38,7 @@
                            :to="{path:publicPath, query:{searchText:organizer}}">
                 {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
             </span>
-            
+
           </div>
 
           <div class="mt-auto">
@@ -58,7 +63,7 @@
 
 
     </div>
-
+  </div>
   </div>
 </template>
 

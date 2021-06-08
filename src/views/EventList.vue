@@ -160,20 +160,13 @@ export default {
 
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
-<<<<<<< HEAD
-                  event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace(':00', '')
-=======
+
                   event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
->>>>>>> develop
 
                 }
                 if (event.enddate > 0) {
                   let enddate = new Date(event.enddate * 1000)
-<<<<<<< HEAD
-                  event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace(':00', '')
-=======
                   event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
->>>>>>> develop
                 }
 
                 events.push(event)
