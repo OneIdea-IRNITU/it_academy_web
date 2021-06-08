@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-prevent-closing variant="primary" class="btn-lg">Подавть заявку</b-button>
+    <b-button v-b-modal.modal-prevent-closing variant="primary" class="btn-lg">Подайте заявку</b-button>
 
     <b-modal
         id="modal-prevent-closing"

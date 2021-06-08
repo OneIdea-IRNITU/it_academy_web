@@ -8,7 +8,7 @@
 
      <div v-if="!currentTime">
        <span>
-      Уже прошло<br/>
+      Мероприятие завершено<br/>
       </span>
      </div>
 
