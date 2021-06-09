@@ -40,14 +40,23 @@ export default {
 
 <style scoped>
 
+.nav-item{
+  margin: 12px 0;
+}
 
-.nav__items{
+.nav__items {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+
+.nav__login {
+  white-space: nowrap;
+}
+
 .nav__login__link__text {
   color: #000000;
+
 }
 </style>
