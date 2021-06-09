@@ -11,7 +11,7 @@
       <div v-if="loading">Loading...</div>
       <div v-else>
         <div class="row event-card__info">
-          <div class="col-6 d-flex align-items-start flex-column">
+          <div class="col-lg-6 d-flex align-items-start flex-column">
             <h1 class="event-card__title">{{ event.fullname }}</h1>
 
             <a class="event-card__category">#{{ event.category }}</a>
@@ -144,12 +144,16 @@ export default {
   margin-bottom: 35px;
 }
 
+.event-card__items{
+  margin-bottom: 30px;
+}
+
 .event-card__item {
   margin: 8px 0;
 }
 
 .event-card__registration-form{
-  margin-top: 52px;
+  margin-top: 22px;
 }
 
 .event-card__description{
