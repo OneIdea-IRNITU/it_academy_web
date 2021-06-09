@@ -55,7 +55,7 @@
               <div class="mt-auto">
 
                 <router-link v-bind:to="'event/' + event.course_id">
-                  <button class="event__button btn btn-primary col-6 ">
+                  <button class="event__button btn btn-primary col-9 ">
                     Подробнее
                   </button>
                 </router-link>
