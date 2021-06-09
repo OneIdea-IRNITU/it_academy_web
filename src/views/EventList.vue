@@ -4,12 +4,13 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="row mt-3 mb-3">
-        <div class="col-md-6">
-          <b-form-input type="search" v-model="searchText" placeholder="Поиск..."></b-form-input>
+        <div class="col-md-12">
+          <b-form-input class="search" type="search" v-model="searchText"
+                        placeholder="Найти мероприятие"></b-form-input>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3 search_filters">
           <b-form-select
               :disabled="useFilters"
               v-model="dateFilter"
@@ -18,45 +19,48 @@
 
         </div>
       </div>
-      <div class="row">
+      <div class="row ">
         <div v-if="!sortedEvents.length">
           <div class="col">
             <p>Ничего не нашли</p>
           </div>
         </div>
-        <div v-else class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
-          <div class="event__img" >
-            <router-link v-bind:to="'event/' + event.course_id">
-              <img class="card-img-top"
-                   v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
-                   alt="Card image cap">
-            </router-link>
-          </div>
-          
-          <div class="card-body d-flex flex-column">
-            <router-link v-bind:to="'event/' + event.course_id">
-              <h5 class="card-title">{{ event.fullname }}</h5>
-            </router-link>
 
-            <a class="category">#{{ event.category }}</a>
-
-            <p class="card-text">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                   class="bi bi-calendar-event" viewBox="0 0 16 16">
-                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
-                <path
-                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-              </svg>
-              <span class="startdate"> {{ event.startdate_formatted }}</span>
-              <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
-            </p>
-            <Timer :event="event"/>
-            <div class="mt-auto">
+        <div v-else class="col-12 col-md-6 col-lg-4 mb-4" v-for="event in sortedEvents" :key="event.course_id">
+          <div class="card h-100 ">
+            <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
-                <button class="btn btn-primary ">
-                  Подробнее
-                </button>
+                <img class="card-img-top"
+                     v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
+                     alt="Card image cap">
               </router-link>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+              <router-link class="event__title" v-bind:to="'event/' + event.course_id">
+                <h5 class="card-title">{{ event.fullname }}</h5>
+              </router-link>
+
+              <a class="category"><small>#{{ event.category }}</small></a>
+
+              <p class="card-text">
+                <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
+                <small class="startdate"> {{ event.startdate_formatted }}</small>
+                <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
+                <small>
+                  <Timer :event="event"/>
+                </small>
+              </p>
+
+              <div class="mt-auto">
+
+                <router-link v-bind:to="'event/' + event.course_id">
+                  <button class="btn btn-primary col-6">
+                    Подробнее
+                  </button>
+                </router-link>
+
+              </div>
             </div>
           </div>
         </div>
@@ -118,12 +122,12 @@ export default {
 
 
       let events = this.events.filter((elem) => {
-        
-        if (searchText.length!=0) {
+
+        if (searchText.length != 0) {
           return elem.fullname.toLowerCase().includes(searchText) || elem.organizers.toLowerCase().includes(searchText)
         } else {
           let startDate = new Date(elem.startdate * 1000)
-        
+
           if (dateFilter === 'upcoming') {
             return now < startDate;
           } else if (dateFilter === 'past') {
@@ -153,11 +157,11 @@ export default {
         }
 
       })
-     
+
       return events
     }
   },
-    methods: {
+  methods: {
     log(item) {
       console.log(item)
     }
@@ -171,7 +175,7 @@ export default {
 
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
-                  
+
                   event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
                 }
@@ -197,11 +201,24 @@ export default {
 
 <style scoped>
 
-.event__img {
-  padding-top: 10px;
-  min-height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.search {
+  /*padding: 14px;*/
 }
+
+.search_filters select {
+  color: #2185FB;
+}
+
+.event__img img {
+  border-radius: 12px 12px 0 0;
+  object-fit: cover;
+  width: 100%;
+  height: 318px;
+}
+
+.event__title {
+  color: black;
+}
+
+
 </style>
