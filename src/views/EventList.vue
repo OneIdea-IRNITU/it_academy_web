@@ -50,9 +50,10 @@
                 <small>
                   <Timer :event="event"/>
                 </small>
-              </p>
-
+              
+              
               <small class="row__item">
+                <img class="organizers__img" :src="require('@/assets/organizer_icon.svg')" alt="Организаторы">
                 <span class="row__org-title">
                   {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
                 </span>
@@ -62,7 +63,7 @@
                   {{ event.organizers.length - 1 != index ? ', ' : '' }}
                 </span>
               </small>
-              
+              </p>
               <div class="mt-auto">
 
                 <router-link v-bind:to="'event/' + event.course_id">
@@ -237,5 +238,8 @@ export default {
   color: black;
 }
 
+.organizers__img{
+  height: 16px;
+}
 
 </style>
