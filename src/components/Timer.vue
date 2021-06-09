@@ -1,40 +1,20 @@
 <template>
   <div>
-    <div v-if="currentTime">
-      <span v-if="!FinalComparefinc()">
-        Осталось: <span v-if="days">{{ days }}</span> дней<br />
-      </span>
-     </div>
-
-     <div v-if="!currentTime">
-       <span>
+    <div v-if="this.last_days === null">
+      <span>
       Мероприятие завершено<br/>
       </span>
      </div>
 
-    <!-- <div class="text-center" v-if="!currentTime">
-      Уже сегодня!
-    </div> -->
-
-      <!-- 
-      deadlineDay
-      deadlineMonth
-      deadlineYear
-      nowDay
-      nowMonth
-      nowYear
-      isExactYear
-      isExactMonth
-      isExactDay
-      FirstCompare
-      FinalCompare -->
-
-
-    <div v-if="FinalComparefinc()" :load="log(FinalComparefinc)">
-        Уже сегодня! <br/>
-        <span v-if="days">{{ days }}:</span
-        ><span v-if="days">{{ hours | formatTime }}:</span><span>{{ minutes | formatTime }}:{{ seconds | formatTime }}</span><br />
+    <div v-else-if="this.last_days === 0">
+        Уже сегодня!
     </div>
+
+    <div v-else>
+        {{ sklonenie_ostalos(last_days) }} <span>{{ last_days }}</span> {{ sklonenie_dney(last_days) }}
+     </div>
+
+    
   </div>
 </template>
 
@@ -51,124 +31,48 @@ export default {
         description: null,
         image: null,
         organizers: null,
+        enddate_formatted: null,
+        startdate_formatted: null
       },
   },
   data() {
     return {
-    // Куррент тайм - оставшееся время
-      currentTime: Date.parse(this.deadline) - Date.parse(new Date()),
-    // "Сегодняшнее число/месяц" и "Число/месяц мероприятия"
-    //   datacompare: new Date(this.deadline) === new Date(),
-      deadlineDay: (new Date(this.deadline)).getDate(),
-      deadlineMonth: (new Date(this.deadline)).getMonth()+1,
-      deadlineYear: (new Date(this.deadline)).getFullYear(),
-      nowDay: (new Date()).getDate(),
-      nowMonth: (new Date()).getMonth()+1,
-      nowYear: (new Date()).getFullYear(),
-
-      isExactYear: Boolean,
-      isExactMonth: Boolean,
-      isExactDay: Boolean,
-
-      stack: '',
-      unstack: '',
-      cut: '',
-      cutFull: '',
-
-      FirstCompare: Boolean,
-      FinalCompare: Boolean,
-      timez: '',
-      deadline: null,
-      speed: {
-        type: Number,
-        default: 1000,
-    },
+      last_days: null,
     };
   },
   mounted() {
-    setTimeout(this.countdown, 10);
-
-        this.timez = String(this.event.startdate).replace(/\./g,'-').replace(/ /g,'T') + ':00';
-      
-        // Приводим к формату Y-М-DTH:M:S
-
-          let i = 0;
-          while (this.timez[i] !== 'T'){
-            this.stack += this.timez[i];
-              i++;
-          }
-          this.stack = this.stack.split("").reverse().join("")+'-';
-
-          for(i = 0;i<=this.stack.length;i++){
-            if(this.stack[i] !== '-'){
-              this.cut += this.stack[i]
-            }else{
-              this.cutFull += this.cut.split("").reverse().join("") + '-'
-              this.cut = ''
-  
-            }
-          }
-          this.cutFull = this.cutFull.slice(0,-1)
-          this.unstack = this.timez.slice(this.stack.length, this.timez.length)
-          this.timez = this.cutFull + 'T' + this.unstack;
-
-          this.deadline = this.timez;
-      },
-  computed: {
-    seconds() {
-      return Math.floor((this.currentTime / 1000) % 60);
-    },
-    minutes() {
-      return Math.floor((this.currentTime / 1000 / 60) % 60);
-    },
-    hours() {
-      return Math.floor((this.currentTime / (1000 * 60 * 60)) % 24);
-    },
-    days() {
-      return Math.floor(this.currentTime / (1000 * 60 * 60 * 24));
-    }
-  },
-  watch:{
-    isExactYearfunc(){
-       return this.deadlineYear === this.nowYear
-    },
-    isExactMonthfunc(){
-       return this.deadlineMonth === this.nowMonth
-    },
-    isExactDayfunc(){
-       return this.deadlineDay === this.nowDay
-    },
-  },
-
-  filters: {
-    formatTime(value) {
-      if (value < 10) {
-        return "0" + value;
+    let now = new Date()
+    let startdate = new Date(this.event.startdate*1000)
+    if (startdate >= now){
+      let nullDate = new Date(this.event.startdate*1000).setHours(0,0,0,0)
+      let nullNow = new Date().setHours(0,0,0,0)
+      if (nullDate === nullNow){
+        this.last_days = 0
       }
-      return value;
+      else{ 
+        this.last_days = Math.ceil(((startdate) - now)/(1000 * 60 * 60 * 24))
+      }
     }
   },
+
   methods: {
-    countdown() {
-      this.currentTime = Date.parse(this.deadline) - Date.parse(new Date());
-      if (this.currentTime > 0) {
-        setTimeout(this.countdown, this.speed);
-      } else {
-        this.currentTime = null;
-      }
-    },
     log(item) {
       console.log(item)
     },
-    FinalComparefinc(){
-      this.isExactYear = (this.deadlineYear === this.nowYear)
-      this.isExactMonth = this.deadlineMonth === this.nowMonth
-      this.isExactDay = this.deadlineDay === this.nowDay
-    
-      this.FirstCompare = this.isExactYear && this.isExactMonth
-      this.FinalCompare = this.FirstCompare && this.isExactDay
-      return this.FinalCompare
-    },
+    sklonenie_dney(n) {  
+    let text_forms = ['день', 'дня', 'дней']
+    n = Math.abs(n) % 100; var n1 = n % 10;
+    if (n > 10 && n < 20) { return text_forms[2]; }
+    if (n1 > 1 && n1 < 5) { return text_forms[1]; }
+    if (n1 == 1) { return text_forms[0]; }
+    return text_forms[2];
+},
+    sklonenie_ostalos(n) {  
+    let text_forms = ['Осталось:', 'Остался:']
+    n = Math.abs(n) % 100; var n1 = n % 10;
+    if (n1 == 1) { return text_forms[1]; }
+    return text_forms[0];
+}
   }
 }
 </script>

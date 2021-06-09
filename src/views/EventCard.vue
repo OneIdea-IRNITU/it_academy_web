@@ -20,8 +20,8 @@
               <path
                   d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
             </svg>
-            <span class="startdate"> {{ event.startdate }}</span>
-            <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
+            <span class="startdate"> {{ event.startdate_formatted }}</span>
+            <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
           </div>
 
           <!-- <div class="organizers">Организатор: -->
@@ -107,14 +107,15 @@ export default {
           this.event.organizers = this.event.organizers.split(', ');
 
           if (this.event.startdate > 0) {
-            let startdate = new Date(this.event.startdate * 1000)
-            this.event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace(':00:00', '')
+                  let startdate = new Date(this.event.startdate * 1000)
+                  
+                  this.event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
-          }
-          if (this.event.enddate > 0) {
-            let enddate = new Date(this.event.enddate * 1000)
-            this.event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace(':00:00', '')
-          }
+                }
+                if (this.event.enddate > 0) {
+                  let enddate = new Date(this.event.enddate * 1000)
+                  this.event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+                }
 
         })
         .catch(error => {
