@@ -7,24 +7,22 @@
 
     <div v-if="loading">Loading...</div>
     <div v-else>
-      <div class="row">
+      <div class="row event-card__info">
         <div class="col-6 d-flex align-items-start flex-column">
-          <h1>{{ event.fullname }}</h1>
+          <h1 class="event-card__title">{{ event.fullname }}</h1>
 
-          <a class="category">#{{ event.category }}</a>
+          <a class="event-card__category">#{{ event.category }}</a>
 
-          <div class="event-dates">
+          <div class="event-card__dates">
             <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-            <span class="startdate"> {{ event.startdate }}</span>
-            <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
+            <span class="event-card__startdate"> {{ event.startdate }}</span>
+            <span v-if="event.enddate>0" class="event-card__enddate"> - {{ event.enddate }}</span>
           </div>
 
-          <!-- <div class="organizers">Организатор: -->
+
           <Timer :event="event" />
-          <!-- <a class="organizer-items">{{ event.organizers }}</a> -->
 
-
-          <div class="organizers">
+          <div class="event-card__organizers organizers">
             <span class="organizers__title">
               {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
             </span>
@@ -33,23 +31,22 @@
                            :to="{path:publicPath, query:{searchText:organizer}}">
                 {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
             </span>
-
           </div>
 
-          <div class="mt-auto">
+          <div class="mt-auto event-card__registration-form">
             <EventRegistrationForm/>
           </div>
         </div>
 
         <div class="col-6">
-          <div v-if="event.image" class="image">
-            <img v-bind:src="event.image">
+          <div v-if="event.image" >
+            <img class="event-card__image" v-bind:src="event.image">
           </div>
         </div>
 
       </div>
 
-      <div v-if="event.description" class="row mt-3 mb-3">
+      <div v-if="event.description" class="row mt-3 mb-3 event-card__description">
         <div class="col-10">
           <h2>О мероприятии</h2>
           <div v-html="event.description" class="description"></div>
@@ -126,7 +123,7 @@ export default {
 </script>
 
 <style scoped>
-.event-card .image img {
+.event-card__image {
   max-width: 100%;
 }
 
