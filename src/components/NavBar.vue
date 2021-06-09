@@ -49,7 +49,6 @@ export default {
 
 .nav-link {
   font-size: 18px !important;
-  color: red;
 }
 
 .nav__items {

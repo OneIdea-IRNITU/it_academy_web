@@ -24,7 +24,6 @@
               id="input-1"
               v-model="form.email"
               type="email"
-              placeholder="Введите email"
               :state="emailState"
               required
           ></b-form-input>
@@ -41,7 +40,6 @@
           <b-form-input
               id="input-2"
               v-model="form.lastname"
-              placeholder="Введите фимилию"
               :state="lastnameState"
               required
           ></b-form-input>
@@ -57,7 +55,6 @@
           <b-form-input
               id="input-2"
               v-model="form.firstname"
-              placeholder="Введите имя"
               :state="firstnameState"
               required
           ></b-form-input>
@@ -73,7 +70,6 @@
           <b-form-input
               id="input-2"
               v-model="form.surname"
-              placeholder="Введите отчество"
               :state="surnameState"
               required
           ></b-form-input>
