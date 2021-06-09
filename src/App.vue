@@ -64,7 +64,7 @@ small {
   line-height: 16px !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   h1 {
     font-weight: 500 !important;
     font-size: 60px !important;
@@ -97,6 +97,11 @@ small {
     font-size: 22px !important;
     line-height: 150% !important;
   }
+
+  .container {
+    padding-top: 75px;
+  }
+
 }
 
 
@@ -110,9 +115,6 @@ small {
   color: #000000;
 }
 
-.container {
-  padding-top: 75px;
-}
 
 .content {
   margin: 0;
