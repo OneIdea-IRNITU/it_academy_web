@@ -141,6 +141,11 @@ input, select, option {
   border-radius: 12px !important;
 }
 
+.btn-primary{
+  background-color: #2185FB !important;
+  border-color: #2185FB !important;
+}
+
 ._vue-flash-msg-body_success {
   z-index: 100000;
 }
