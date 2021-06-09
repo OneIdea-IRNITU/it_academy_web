@@ -62,6 +62,8 @@ small {
   min-height: 40px !important;
   font-size: 14px !important;
   line-height: 16px !important;
+  padding-top: 12px!important;
+  padding-bottom: 12px!important;
 }
 
 @media (min-width: 960px) {
@@ -93,6 +95,8 @@ small {
     min-height: 50px !important;
     font-size: 22px !important;
     line-height: 33px !important;
+    padding-top: 16px!important;
+    padding-bottom: 16px!important;
   }
 
   #app {
