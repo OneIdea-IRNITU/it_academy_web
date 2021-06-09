@@ -25,14 +25,14 @@
           </div>
         </div>
         <div v-else class="card  col-12 col-md-6 col-lg-4" v-for="event in sortedEvents" :key="event.course_id">
-          <div class="event__img">
+          <div class="event__img" >
             <router-link v-bind:to="'event/' + event.course_id">
               <img class="card-img-top"
                    v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
                    alt="Card image cap">
             </router-link>
           </div>
-
+          
           <div class="card-body d-flex flex-column">
             <router-link v-bind:to="'event/' + event.course_id">
               <h5 class="card-title">{{ event.fullname }}</h5>
@@ -50,7 +50,7 @@
               <span class="startdate"> {{ event.startdate_formatted }}</span>
               <span v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</span>
             </p>
-
+            <Timer :event="event"/>
             <div class="mt-auto">
               <router-link v-bind:to="'event/' + event.course_id">
                 <button class="btn btn-primary ">
@@ -68,9 +68,13 @@
 
 <script>
 import axios from "axios";
+import Timer from "@/components/Timer";
 
 export default {
   name: "EventList",
+  components: {
+    Timer
+  },
   data: function () {
     return {
       loading: true,
@@ -88,7 +92,7 @@ export default {
         enddate: null,
         fullname: null,
         image: null,
-        organizers: null,
+        organizers: [],
         startdate: null,
       }],
     }
@@ -114,11 +118,12 @@ export default {
 
 
       let events = this.events.filter((elem) => {
-        if (searchText) {
+        
+        if (searchText.length!=0) {
           return elem.fullname.toLowerCase().includes(searchText) || elem.organizers.toLowerCase().includes(searchText)
         } else {
           let startDate = new Date(elem.startdate * 1000)
-
+        
           if (dateFilter === 'upcoming') {
             return now < startDate;
           } else if (dateFilter === 'past') {
@@ -148,7 +153,13 @@ export default {
         }
 
       })
+     
       return events
+    }
+  },
+    methods: {
+    log(item) {
+      console.log(item)
     }
   },
   mounted() {
@@ -160,7 +171,7 @@ export default {
 
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
-
+                  
                   event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
                 }
