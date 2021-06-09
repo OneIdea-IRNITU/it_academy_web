@@ -117,7 +117,7 @@ small {
   font-weight: normal;
 
   padding-top: 96px;
-  /*background-color: #F0F5FA;*/
+  background-color: #F0F5FA;
   color: #000000;
 }
 
