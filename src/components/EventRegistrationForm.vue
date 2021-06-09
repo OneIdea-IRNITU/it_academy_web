@@ -8,9 +8,7 @@
         title="Регистрация на мероприятие"
         @show="resetModal"
         @hidden="resetModal"
-        @ok="handleOk"
-        ok-only
-        ok-title="Отправить"
+        hide-footer
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
@@ -24,7 +22,6 @@
               id="input-1"
               v-model="form.email"
               type="email"
-              placeholder="Введите email"
               :state="emailState"
               required
           ></b-form-input>
@@ -41,7 +38,6 @@
           <b-form-input
               id="input-2"
               v-model="form.lastname"
-              placeholder="Введите фимилию"
               :state="lastnameState"
               required
           ></b-form-input>
@@ -57,7 +53,6 @@
           <b-form-input
               id="input-2"
               v-model="form.firstname"
-              placeholder="Введите имя"
               :state="firstnameState"
               required
           ></b-form-input>
@@ -73,7 +68,6 @@
           <b-form-input
               id="input-2"
               v-model="form.surname"
-              placeholder="Введите отчество"
               :state="surnameState"
               required
           ></b-form-input>
@@ -98,7 +92,7 @@
           </b-form-checkbox>
         </b-form-group>
 
-
+        <b-button class="modal__ok-btn" variant="primary" block @click="handleOk">Отправить</b-button>
       </form>
     </b-modal>
   </div>
@@ -229,6 +223,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.modal__ok-btn{
+  margin-top: 76px ;
+}
+</style>
+
 
 
 
