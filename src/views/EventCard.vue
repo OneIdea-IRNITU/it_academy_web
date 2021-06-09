@@ -18,8 +18,8 @@
             <div class="event-card__items">
               <div class="event-card__item">
                 <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                <span class="event-card__startdate"> {{ event.startdate }}</span>
-                <span v-if="event.enddate>0" class="event-card__enddate"> - {{ event.enddate }}</span>
+                <span class="event-card__startdate"> {{ event.startdate_formatted  }}</span>
+                <span v-if="event.enddate_formatted>0" class="event-card__enddate"> - {{ event.enddate_formatted }}</span>
               </div>
 
               <div class="event-card__item">

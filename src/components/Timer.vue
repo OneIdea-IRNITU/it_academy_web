@@ -2,16 +2,16 @@
   <div>
     <div v-if="this.last_days === null">
       <span>
-      Мероприятие завершено<br/>
+      <img :src="require('@/assets/timer_icon.svg')" alt="Таймер"> Мероприятие завершено
       </span>
      </div>
 
     <div v-else-if="this.last_days === 0">
-        Уже сегодня!
+        <img :src="require('@/assets/timer_icon.svg')" alt="Таймер"> Уже сегодня!
     </div>
 
     <div v-else>
-        {{ sklonenie_ostalos(last_days) }} <span>{{ last_days }}</span> {{ sklonenie_dney(last_days) }}
+        <img :src="require('@/assets/timer_icon.svg')" alt="Таймер"> {{ sklonenie_ostalos(last_days) }} <span>{{ last_days }}</span> {{ sklonenie_dney(last_days) }}
      </div>
 
     
