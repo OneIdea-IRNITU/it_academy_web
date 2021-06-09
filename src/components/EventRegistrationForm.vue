@@ -8,9 +8,7 @@
         title="Регистрация на мероприятие"
         @show="resetModal"
         @hidden="resetModal"
-        @ok="handleOk"
-        ok-only
-        ok-title="Отправить"
+        hide-footer
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
@@ -94,7 +92,7 @@
           </b-form-checkbox>
         </b-form-group>
 
-
+        <b-button class="modal__ok-btn" variant="primary" block @click="handleOk">Отправить</b-button>
       </form>
     </b-modal>
   </div>
@@ -225,6 +223,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.modal__ok-btn{
+  margin-top: 76px ;
+}
+</style>
+
 
 
 
