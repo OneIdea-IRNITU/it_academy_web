@@ -100,7 +100,7 @@ small {
     line-height: 150% !important;
   }
 
-  .container {
+  .content {
     padding-top: 75px;
   }
 

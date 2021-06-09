@@ -38,7 +38,7 @@
 
             <div class="card-body d-flex flex-column">
               <router-link class="event__title" v-bind:to="'event/' + event.course_id">
-                <h5 class="card-title">{{ event.fullname }}</h5>
+                <h4 class="card-title">{{ event.fullname }}</h4>
               </router-link>
 
               <a class="category"><small>#{{ event.category }}</small></a>
