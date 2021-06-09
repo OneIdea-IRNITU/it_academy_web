@@ -161,6 +161,7 @@ export default {
 
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
+
                   event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
                 }

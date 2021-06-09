@@ -19,6 +19,11 @@
             <span v-if="event.enddate>0" class="enddate"> - {{ event.enddate }}</span>
           </div>
 
+          <!-- <div class="organizers">Организатор: -->
+          <Timer :event="event" />
+          <!-- <a class="organizer-items">{{ event.organizers }}</a> -->
+
+
           <div class="organizers">
             <span class="organizers__title">
               {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
@@ -28,6 +33,7 @@
                            :to="{path:publicPath, query:{searchText:organizer}}">
                 {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
             </span>
+
           </div>
 
           <div class="mt-auto">
@@ -52,19 +58,22 @@
 
 
     </div>
-
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import axios from "axios";
+import Timer from "@/components/Timer";
 import EventRegistrationForm from "@/components/EventRegistrationForm";
 import {publicPath} from "../../vue.config";
+
 
 export default {
   name: "EventCard",
   components: {
-    EventRegistrationForm
+    EventRegistrationForm,
+    Timer
   },
   data: function () {
     return {
@@ -94,12 +103,12 @@ export default {
 
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
-            this.event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+            this.event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace(':00:00', '')
 
           }
           if (this.event.enddate > 0) {
             let enddate = new Date(this.event.enddate * 1000)
-            this.event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+            this.event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace(':00:00', '')
           }
 
         })
