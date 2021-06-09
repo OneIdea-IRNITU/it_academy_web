@@ -19,7 +19,7 @@
 
         </div>
       </div>
-      <div class="row ">
+      <div class="row">
         <div v-if="!sortedEvents.length">
           <div class="col">
             <p>Ничего не нашли</p>
@@ -52,6 +52,17 @@
                 </small>
               </p>
 
+              <small class="row__item">
+                <span class="row__org-title">
+                  {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
+                </span>
+
+                <span v-for="(organizer, index) in event.organizers" :key="index">
+                  <router-link class="row__org-link" :to="{path:publicPath, query:{searchText:organizer}}">{{ organizer }}</router-link>
+                  {{ event.organizers.length - 1 != index ? ', ' : '' }}
+                </span>
+              </small>
+              
               <div class="mt-auto">
 
                 <router-link v-bind:to="'event/' + event.course_id">
@@ -73,6 +84,7 @@
 <script>
 import axios from "axios";
 import Timer from "@/components/Timer";
+import {publicPath} from "../../vue.config";
 
 export default {
   name: "EventList",
@@ -84,6 +96,7 @@ export default {
       loading: true,
       errored: false,
       dateFilter: 'upcoming',
+      publicPath: publicPath,
       searchText: '',
       dateFilters: [
         {text: 'Предстоит', value: 'upcoming'},
@@ -108,7 +121,7 @@ export default {
   },
   computed: {
     useFilters() {
-      let searchText = this.searchText.toLowerCase()
+      let searchText = this.searchText.toString().toLowerCase()
       if (searchText) {
         return true
       } else {
@@ -118,13 +131,13 @@ export default {
     sortedEvents() {
       let now = new Date();
       let dateFilter = this.dateFilter
-      let searchText = this.searchText.toLowerCase()
+      let searchText = this.searchText.toString().toLowerCase()
 
 
       let events = this.events.filter((elem) => {
 
         if (searchText.length != 0) {
-          return elem.fullname.toLowerCase().includes(searchText) || elem.organizers.toLowerCase().includes(searchText)
+          return elem.fullname.toString().toLowerCase().includes(searchText) || elem.organizers.toString().toLowerCase().includes(searchText)
         } else {
           let startDate = new Date(elem.startdate * 1000)
 
@@ -173,6 +186,7 @@ export default {
               let events = [];
               response.data.forEach(function (event) {
 
+                event.organizers = event.organizers.split(', ')
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
 
@@ -183,7 +197,7 @@ export default {
                   let enddate = new Date(event.enddate * 1000)
                   event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
                 }
-
+                
                 events.push(event)
               })
               this.events = events
