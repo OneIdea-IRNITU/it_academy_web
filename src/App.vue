@@ -54,7 +54,7 @@ small {
 }
 
 #app {
-  font-size: 14px !important;
+  font-size: 16px !important;
   line-height: 16px !important;
 }
 
@@ -91,6 +91,8 @@ small {
 
   .btn {
     min-height: 50px !important;
+    font-size: 22px !important;
+    line-height: 33px !important;
   }
 
   #app {

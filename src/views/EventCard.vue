@@ -16,40 +16,45 @@
 
             <a class="event-card__category">#{{ event.category }}</a>
 
-            <div class="event-card__dates">
+            <div class="event-card__items">
+              <div class="event-card__item">
                 <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
                 <span class="event-card__startdate"> {{ event.startdate }}</span>
                 <span v-if="event.enddate>0" class="event-card__enddate"> - {{ event.enddate }}</span>
-            </div>
+              </div>
 
+              <div class="event-card__item">
+                <Timer :event="event"/>
+              </div>
 
-            <Timer :event="event"/>
-
-            <div class="event-card__organizers organizers">
-            <span class="organizers__title">
-              {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
-            </span>
-              <span v-for="(organizer, index) in event.organizers" :key="index">
-              <router-link class="organizers__link"
+              <div class="event-card__item">
+                <span class="event-card__org-title">
+                  {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
+                </span>
+                <span v-for="(organizer, index) in event.organizers" :key="index">
+              <router-link class="event-card__org-link"
                            :to="{path:publicPath, query:{searchText:organizer}}">
                 {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
             </span>
+              </div>
             </div>
 
-            <div class="mt-auto event-card__registration-form">
-              <EventRegistrationForm/>
-            </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-lg-6 ">
             <div v-if="event.image">
               <img class="event-card__image" v-bind:src="event.image">
             </div>
           </div>
-
         </div>
 
-        <div v-if="event.description" class="row mt-3 mb-3 event-card__description">
+
+        <div class="event-card__registration-form">
+          <EventRegistrationForm/>
+        </div>
+
+
+        <div v-if="event.description" class="row event-card__description">
           <div class="col-10">
             <h2>О мероприятии</h2>
             <div v-html="event.description" class="description"></div>
@@ -137,5 +142,17 @@ export default {
 
 .event-card__title {
   margin-bottom: 35px;
+}
+
+.event-card__item {
+  margin: 8px 0;
+}
+
+.event-card__registration-form{
+  margin-top: 52px;
+}
+
+.event-card__description{
+  margin-top: 66px;
 }
 </style>
