@@ -27,16 +27,87 @@ export default {
 </script>
 
 <style>
+
+/*phone-text*/
+h1 {
+  font-weight: 500 !important;
+  font-size: 30px !important;
+  line-height: 130% !important;
+}
+
+h2 {
+  font-weight: 500 !important;
+  font-size: 28px !important;
+  line-height: 130% !important;
+}
+
+h3 {
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+}
+
+small {
+  font-weight: normal !important;
+  font-size: 13px !important;
+  line-height: 15px !important;
+}
+
+#app {
+  font-size: 14px !important;
+  line-height: 16px !important;
+}
+
+.btn {
+  min-height: 40px !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-weight: 500 !important;
+    font-size: 60px !important;
+    line-height: 70px !important;
+  }
+
+  h2 {
+    font-weight: 500 !important;
+    font-size: 48px !important;
+    line-height: 56px !important;
+  }
+
+  h3 {
+    font-weight: 500 !important;
+    font-size: 22px !important;
+    line-height: 26px !important;
+  }
+
+  small {
+    font-weight: normal !important;
+    font-size: 18px !important;
+    line-height: 21px !important;
+  }
+
+  .btn {
+    min-height: 50px !important;
+  }
+
+  #app {
+    font-size: 22px !important;
+    line-height: 150% !important;
+  }
+}
+
+
 #app {
   font-family: 'Roboto', sans-serif !important;
   font-style: normal;
   font-weight: normal;
-  font-size: 22px;
-  line-height: 150%;
-  color: #000000;
 
   padding-top: 96px;
-  background-color: #F0F5FA;
+  /*background-color: #F0F5FA;*/
+  color: #000000;
 }
 
 .container {
@@ -60,7 +131,6 @@ input, select, option {
 
 .btn {
   border-radius: 12px !important;
-  min-height: 50px !important;
 }
 
 ._vue-flash-msg-body_success {
