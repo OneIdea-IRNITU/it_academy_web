@@ -11,7 +11,7 @@
     </div>
 
     <div v-else>
-        Осталось: <span>{{ this.last_days }}</span> дней
+        {{ sklonenie_ostalos(last_days) }} <span>{{ last_days }}</span> {{ sklonenie_dney(last_days) }}
      </div>
 
     
@@ -43,7 +43,6 @@ export default {
   mounted() {
     let now = new Date()
     let startdate = new Date(this.event.startdate*1000)
-    console.log(startdate)
     if (startdate >= now){
       let nullDate = new Date(this.event.startdate*1000).setHours(0,0,0,0)
       let nullNow = new Date().setHours(0,0,0,0)
@@ -60,6 +59,20 @@ export default {
     log(item) {
       console.log(item)
     },
+    sklonenie_dney(n) {  
+    let text_forms = ['день', 'дня', 'дней']
+    n = Math.abs(n) % 100; var n1 = n % 10;
+    if (n > 10 && n < 20) { return text_forms[2]; }
+    if (n1 > 1 && n1 < 5) { return text_forms[1]; }
+    if (n1 == 1) { return text_forms[0]; }
+    return text_forms[2];
+},
+    sklonenie_ostalos(n) {  
+    let text_forms = ['Осталось:', 'Остался:']
+    n = Math.abs(n) % 100; var n1 = n % 10;
+    if (n1 == 1) { return text_forms[1]; }
+    return text_forms[0];
+}
   }
 }
 </script>
