@@ -6,7 +6,6 @@
         </b-button>
       </router-link>
     </div>
-
     <div class="event-card">
       <div v-if="loading">Loading...</div>
       <div v-else>
@@ -108,12 +107,13 @@ export default {
 
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
-            this.event.startdate = startdate.toLocaleString().replace(',', '').slice(0, -3).replace(':00:00', '')
+
+            this.event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
 
           }
           if (this.event.enddate > 0) {
             let enddate = new Date(this.event.enddate * 1000)
-            this.event.enddate = enddate.toLocaleString().replace(',', '').slice(0, -3).replace(':00:00', '')
+            this.event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
           }
 
         })
@@ -144,7 +144,7 @@ export default {
   margin-bottom: 35px;
 }
 
-.event-card__items{
+.event-card__items {
   margin-bottom: 30px;
 }
 
@@ -152,11 +152,11 @@ export default {
   margin: 8px 0;
 }
 
-.event-card__registration-form{
+.event-card__registration-form {
   margin-top: 22px;
 }
 
-.event-card__description{
+.event-card__description {
   margin-top: 66px;
 }
 </style>

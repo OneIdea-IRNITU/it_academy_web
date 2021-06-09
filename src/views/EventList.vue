@@ -47,6 +47,9 @@
                 <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
                 <small class="startdate"> {{ event.startdate_formatted }}</small>
                 <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
+                <small>
+                  <Timer :event="event"/>
+                </small>
               </p>
 
               <div class="mt-auto">
@@ -69,9 +72,13 @@
 
 <script>
 import axios from "axios";
+import Timer from "@/components/Timer";
 
 export default {
   name: "EventList",
+  components: {
+    Timer
+  },
   data: function () {
     return {
       loading: true,
@@ -89,7 +96,7 @@ export default {
         enddate: null,
         fullname: null,
         image: null,
-        organizers: null,
+        organizers: [],
         startdate: null,
       }],
     }
@@ -115,7 +122,8 @@ export default {
 
 
       let events = this.events.filter((elem) => {
-        if (searchText) {
+
+        if (searchText.length != 0) {
           return elem.fullname.toLowerCase().includes(searchText) || elem.organizers.toLowerCase().includes(searchText)
         } else {
           let startDate = new Date(elem.startdate * 1000)
@@ -149,7 +157,13 @@ export default {
         }
 
       })
+
       return events
+    }
+  },
+  methods: {
+    log(item) {
+      console.log(item)
     }
   },
   mounted() {
