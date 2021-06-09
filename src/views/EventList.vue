@@ -58,7 +58,7 @@
                 </span>
 
                 <span v-for="(organizer, index) in event.organizers" :key="index">
-                  <router-link class="row__org-link" :to="{path:publicPath, query:{searchText:organizer}}">{{ organizer }}</router-link>
+                  <a class="row__org-link" @click="setSearchText(organizer)">{{ organizer }}</a>
                   {{ event.organizers.length - 1 != index ? ', ' : '' }}
                 </span>
               </small>
@@ -177,6 +177,9 @@ export default {
   methods: {
     log(item) {
       console.log(item)
+    },
+    setSearchText(searchText){
+      this.searchText = searchText
     }
   },
   mounted() {
