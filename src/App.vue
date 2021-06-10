@@ -123,7 +123,7 @@ small {
 
 
 .content {
-  margin: 0;
+  margin: 0 0 50px;
   padding: 0;
   min-height: calc(100vh - 96px);
 }
