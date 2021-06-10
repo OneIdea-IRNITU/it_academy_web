@@ -166,7 +166,6 @@ export default {
         }
 
       }
-
       return valid
     },
     resetModal() {
@@ -207,8 +206,11 @@ export default {
       axios.post('https://open.istu.edu/api/apply.php', data)
           .then((response) => {
             this.flashMessage.success({
-              title: 'Заявка успешно отправлена',
-              message: response.data
+              title: 'Заявка успешно отправлена.',
+              message: response.data,
+              time: 0,
+              blockClass: "my-custom-class",
+              contentClass: "my-content-class"
             });
             console.log(response);
           })

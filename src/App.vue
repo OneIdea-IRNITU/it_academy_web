@@ -151,13 +151,51 @@ input, select, option {
 }
 
 ._vue-flash-msg-body {
+  width: 375px !important;
+  height: 167px !important;
+  
+}
+
+._vue-flash-msg-body__title{
 
 }
 
 ._vue-flash-msg-_right-bottom {
-
+  
 }
 
+._vue-flash-msg-wrapper{
+  background-color: white;
+  font-family: Roboto !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  line-height: 150% !important;
+  color: #212223 !important;
+
+  border-bottom: white !important;
+  border-radius: 12px;
+  
+
+
+}
 ._vue-flash-msg-body__text {
+  /* Сверху | Справа | Снизу | Слева */
+ 
 }
+
+._vue-flash-msg-body.my-custom-class {
+  border: white !important;
+  background-color: white !important;
+}
+
+._vue-flash-msg-body.my-custom-class:hover {
+  background-color: white !important;
+}
+
+._vue-flash-msg-body.my-custom-class .my-content-class {
+  border-left: white !important;
+}
+
+
 </style>
