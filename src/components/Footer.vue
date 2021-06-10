@@ -100,7 +100,7 @@ export default {
 }
 
 .footer__authors {
-
+  margin-top: 20px;
 }
 
 .footer__info {
