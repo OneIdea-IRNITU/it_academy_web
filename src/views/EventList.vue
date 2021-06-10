@@ -31,7 +31,7 @@
             <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
                 <img class="card-img-top"
-                     v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
+                     v-bind:src="event.image ? event.image: '//open.istu.edu/pluginfile.php/1/theme_fordson/headerdefaultimage/1618822616/moocs-benefitting.gif'"
                      alt="Card image cap">
               </router-link>
             </div>
@@ -220,7 +220,7 @@ export default {
   color: black;
 }
 
-.card-text{
+.card-text {
   margin-bottom: 34px;
 }
 
