@@ -31,7 +31,7 @@
             <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
                 <img class="card-img-top"
-                     v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
+                     v-bind:src="event.image ? event.image: '//open.istu.edu/pluginfile.php/1/theme_fordson/headerdefaultimage/1618822616/moocs-benefitting.gif'"
                      alt="Card image cap">
               </router-link>
             </div>
@@ -42,16 +42,23 @@
               </router-link>
 
               <div class="mt-auto">
-                <a class="category"><small>#{{ event.category }}</small></a>
-
-                <p class="card-text">
-                  <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                  <small class="startdate"> {{ event.startdate_formatted }}</small>
-                  <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
-                  <small>
-                    <Timer :event="event"/>
-                  </small>
+                <p>
+                  <a class="category"><small>#{{ event.category }}</small></a>
                 </p>
+                <div class="card-text">
+                  <p>
+                    <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
+                    <small class="startdate"> {{ event.startdate_formatted }}</small>
+                  </p>
+                  <p>
+                    <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
+                  </p>
+                  <p>
+                    <small>
+                      <Timer :event="event"/>
+                    </small>
+                  </p>
+                </div>
 
 
                 <router-link v-bind:to="'event/' + event.course_id">
@@ -220,7 +227,7 @@ export default {
   color: black;
 }
 
-.card-text{
+.card-text {
   margin-bottom: 34px;
 }
 
