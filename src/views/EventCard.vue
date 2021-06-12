@@ -52,7 +52,7 @@
 
 
         <div class="event-card__registration-form">
-          <EventRegistrationForm/>
+          <EventRegistrationForm :startdate="event.startdate"/>
         </div>
 
 
