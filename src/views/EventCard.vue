@@ -50,7 +50,6 @@
           </div>
         </div>
 
-
         <div class="event-card__registration-form">
           <EventRegistrationForm :startdate="event.startdate"/>
         </div>
@@ -111,7 +110,8 @@ export default {
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
 
-            this.event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+            this.event.startdate_formatted = startdate.toLocaleString().replace(',', '').replace('00:00', '00').replace('00:00', '')
+            
 
           }
           if (this.event.enddate > 0) {
