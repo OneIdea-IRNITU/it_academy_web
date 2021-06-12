@@ -102,11 +102,11 @@
 
 <script>
 import axios from "axios";
-import Vue from 'vue';
-import CxltToastr from 'cxlt-vue2-toastr'
 import ConsentToPersonalData from "@/components/ConsentToPersonalData"
+import Vue from 'vue'
+import Notifications from 'vue-notification'
 
-Vue.use(CxltToastr)
+Vue.use(Notifications)
 
 export default {
   components: {
@@ -211,19 +211,11 @@ export default {
       const data = JSON.stringify(this.form);
       axios.post('https://open.istu.edu/api/apply.php', data)
           .then((response) => {
-            this.$toast.success({
-                  title:'Заявление принято',
-                  message: response.data,
-                  progressBar: true,
-                  delay: 0,
-                  position: 'bottom right',
-                  successColor: '#2185FB',
-                  showMethod: 'bounceInRight',
-                  hideMethod: 'bounceOutRight',
-                  showDuration: 2000,
-                  timeOut: 6000,
-              })
-            
+            this.$notify({
+              group: 'foo',
+              title: 'Заявка принята.',
+              text: response.data,
+            });
             console.log(response.data);
           })
   
