@@ -261,6 +261,7 @@ export default {
 
 .organizers__img{
   height: 16px;
+}
   
 .card-text {
   margin-bottom: 34px;
