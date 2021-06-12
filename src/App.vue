@@ -3,7 +3,6 @@
     <NavBar/>
     <div class="container">
       <div class="content">
-        <FlashMessage></FlashMessage>
         <router-view/>
       </div>
     </div>
@@ -22,8 +21,9 @@ export default {
   components: {
     NavBar,
     Footer
-  }
+  },
 }
+
 </script>
 
 <style>
@@ -151,13 +151,15 @@ input, select, option {
 }
 
 ._vue-flash-msg-body {
+  position: absolute !important;
   width: 375px !important;
-  height: 167px !important;
+  height: 140px !important;
+  padding: 3px;
   
 }
 
 ._vue-flash-msg-body__title{
-
+  padding-top: 5px;
 }
 
 ._vue-flash-msg-_right-bottom {
@@ -175,18 +177,15 @@ input, select, option {
 
   border-bottom: white !important;
   border-radius: 12px;
-  
-
 
 }
 ._vue-flash-msg-body__text {
   /* Сверху | Справа | Снизу | Слева */
- 
 }
 
 ._vue-flash-msg-body.my-custom-class {
-  border: white !important;
-  background-color: white !important;
+  border: #2185FB !important;
+  background-color: #2185FB !important;
 }
 
 ._vue-flash-msg-body.my-custom-class:hover {

@@ -2,6 +2,8 @@
   <div>
     <b-button v-b-modal.modal-prevent-closing variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
 
+
+
     <b-modal
         id="modal-prevent-closing"
         ref="modal"
@@ -100,7 +102,11 @@
 
 <script>
 import axios from "axios";
+import Vue from 'vue';
+import CxltToastr from 'cxlt-vue2-toastr'
 import ConsentToPersonalData from "@/components/ConsentToPersonalData"
+
+Vue.use(CxltToastr)
 
 export default {
   components: {
@@ -205,18 +211,23 @@ export default {
       const data = JSON.stringify(this.form);
       axios.post('https://open.istu.edu/api/apply.php', data)
           .then((response) => {
-            this.flashMessage.success({
-              title: 'Заявка успешно отправлена.',
-              message: response.data,
-              time: 0,
-              blockClass: "my-custom-class",
-              contentClass: "my-content-class"
-            });
-            console.log(response);
+            this.$toast.success({
+                  title:'Заявление принято',
+                  message: response.data,
+                  progressBar: true,
+                  delay: 0,
+                  position: 'bottom right',
+                  successColor: '#2185FB',
+                  showMethod: 'bounceInRight',
+                  hideMethod: 'bounceOutRight',
+                  showDuration: 2000,
+                  timeOut: 6000,
+              })
+            
+            console.log(response.data);
           })
-          .catch((error) => {
-            console.log(error);
-          });
+  
+      
     },
     ucFirst(str) {
       if (!str) return str;
@@ -225,7 +236,7 @@ export default {
   }
 }
 </script>
-
+<style src="cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css"></style>
 <style scoped>
 .modal__ok-btn{
   margin-top: 76px ;
