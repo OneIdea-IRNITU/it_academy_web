@@ -31,15 +31,16 @@
             <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
                 <img class="card-img-top"
-                     v-bind:src="event.image ? event.image: require('@/assets/moocs-benefitting.gif')"
+                     v-bind:src="event.image ? event.image: '//open.istu.edu/pluginfile.php/1/theme_fordson/headerdefaultimage/1618822616/moocs-benefitting.gif'"
                      alt="Card image cap">
               </router-link>
             </div>
 
             <div class="card-body d-flex flex-column">
               <router-link class="event__title" v-bind:to="'event/' + event.course_id">
-                <h5 class="card-title">{{ event.fullname }}</h5>
+                <h4 class="card-title">{{ event.fullname }}</h4>
               </router-link>
+
 
               <a class="category"><small>#{{ event.category }}</small></a>
 
@@ -64,10 +65,29 @@
                 </span>
               </small>
               </p>
+
               <div class="mt-auto">
+                <p>
+                  <a class="category"><small>#{{ event.category }}</small></a>
+                </p>
+                <div class="card-text">
+                  <p>
+                    <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
+                    <small class="startdate"> {{ event.startdate_formatted }}</small>
+                  </p>
+                  <p>
+                    <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
+                  </p>
+                  <p>
+                    <small>
+                      <Timer :event="event"/>
+                    </small>
+                  </p>
+                </div>
+
 
                 <router-link v-bind:to="'event/' + event.course_id">
-                  <button class="btn btn-primary col-6">
+                  <button class="event__button btn btn-primary col-9 ">
                     Подробнее
                   </button>
                 </router-link>
@@ -238,8 +258,18 @@ export default {
   color: black;
 }
 
+
 .organizers__img{
   height: 16px;
+  
+.card-text {
+  margin-bottom: 34px;
+}
+
+.event__button {
+  font-size: 18px !important;
+  line-height: 21px !important;
+
 }
 
 </style>

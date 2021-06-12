@@ -2,7 +2,8 @@
   <div>
     <div class="back-btn">
       <router-link class="back-btn__link" title="Назад" :to="{path:publicPath}">
-        <b-button class="back-btn__button" pill variant="light"><span class="back-btn__text">&lt; Назад</span>
+        <b-button class="back-btn__button" variant="light"><span class="back-btn__text"><img class="back-btn__image"
+            :src="require('@/assets/back_btn_icon.svg')" alt="Календарь"> Назад</span>
         </b-button>
       </router-link>
     </div>
@@ -18,8 +19,10 @@
             <div class="event-card__items">
               <div class="event-card__item">
                 <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                <span class="event-card__startdate"> {{ event.startdate_formatted  }}</span>
-                <span v-if="event.enddate_formatted>0" class="event-card__enddate"> - {{ event.enddate_formatted }}</span>
+                <span class="event-card__startdate"> {{ event.startdate_formatted }}</span>
+                <span v-if="event.enddate_formatted>0" class="event-card__enddate"> - {{
+                    event.enddate_formatted
+                  }}</span>
               </div>
 
               <div class="event-card__item">
@@ -138,6 +141,17 @@ export default {
 .back-btn {
   color: black;
   margin-bottom: 32px;
+
+}
+
+.back-btn__text {
+  font-size: 18px !important;
+  line-height: 21px !important;
+  padding: 15px 15px;
+  color: #BCBCBE;
+}
+.back-btn__image{
+  margin-right: 15px;
 }
 
 .event-card__title {

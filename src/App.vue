@@ -28,6 +28,12 @@ export default {
 
 <style>
 
+.content {
+  margin: 0 0 100px;
+  padding: 0;
+  min-height: calc(100vh - 96px);
+}
+
 /*phone-text*/
 h1 {
   font-weight: 500 !important;
@@ -62,6 +68,8 @@ small {
   min-height: 40px !important;
   font-size: 14px !important;
   line-height: 16px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
 }
 
 @media (min-width: 960px) {
@@ -93,6 +101,8 @@ small {
     min-height: 50px !important;
     font-size: 22px !important;
     line-height: 33px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
   }
 
   #app {
@@ -100,7 +110,7 @@ small {
     line-height: 150% !important;
   }
 
-  .container {
+  .content {
     padding-top: 75px;
   }
 
@@ -113,16 +123,10 @@ small {
   font-weight: normal;
 
   padding-top: 96px;
-  /*background-color: #F0F5FA;*/
+  background-color: #F0F5FA;
   color: #000000;
 }
 
-
-.content {
-  margin: 0;
-  padding: 0;
-  min-height: calc(100vh - 96px);
-}
 
 .card {
   border-radius: 12px !important;
@@ -135,6 +139,11 @@ input, select, option {
 
 .btn {
   border-radius: 12px !important;
+}
+
+.btn-primary {
+  background-color: #2185FB !important;
+  border-color: #2185FB !important;
 }
 
 ._vue-flash-msg-body_success {
