@@ -95,7 +95,7 @@
         <b-button class="modal__ok-btn" variant="primary" block @click="handleOk">Отправить</b-button>
       </form>
     </b-modal>
-    <b-button v-if="this.last_days === null" variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
+     <b-button disabled variant="primary" class="btn col-9 col-md-4">Регистрация окончена</b-button>
   </div>
 </template>
 
