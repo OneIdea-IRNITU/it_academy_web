@@ -66,33 +66,12 @@
               </small>
               </p>
 
-              <div class="mt-auto">
-                <p>
-                  <a class="category"><small>#{{ event.category }}</small></a>
-                </p>
-                <div class="card-text">
-                  <p>
-                    <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                    <small class="startdate"> {{ event.startdate_formatted }}</small>
-                  </p>
-                  <p>
-                    <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
-                  </p>
-                  <p>
-                    <small>
-                      <Timer :event="event"/>
-                    </small>
-                  </p>
-                </div>
-
-
                 <router-link v-bind:to="'event/' + event.course_id">
                   <button class="event__button btn btn-primary col-9 ">
                     Подробнее
                   </button>
                 </router-link>
 
-              </div>
             </div>
           </div>
         </div>
