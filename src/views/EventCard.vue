@@ -49,8 +49,10 @@
           </div>
 
           <div class="col-lg-6 ">
-            <div v-if="event.image">
-              <img class="event-card__image" v-bind:src="event.image">
+            <div>
+              <img class="event-card__image"
+                   :src="event.image ? event.image: '//open.istu.edu/pluginfile.php/1/theme_fordson/headerdefaultimage/1618822616/moocs-benefitting.gif'"
+              >
             </div>
           </div>
         </div>
@@ -62,7 +64,7 @@
 
         <div v-if="event.description" class="row event-card__description">
           <div class="col-10">
-            <h2>О мероприятии</h2>
+            <h2 class="event-card__description-title">О мероприятии</h2>
             <div v-html="event.description" class="description"></div>
           </div>
         </div>
@@ -145,19 +147,26 @@ export default {
 
 .back-btn {
   color: black;
-  margin-bottom: 32px;
+}
 
+.back-btn__button {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
 }
 
 .back-btn__text {
   font-size: 18px !important;
   line-height: 21px !important;
-  padding: 15px 15px;
+  padding: 0 27px;
   color: #BCBCBE;
 }
 
 .back-btn__image {
   margin-right: 15px;
+}
+
+.event-card__info {
+  margin-top: 69px;
 }
 
 .event-card__title {
@@ -178,5 +187,9 @@ export default {
 
 .event-card__description {
   margin-top: 66px;
+}
+
+.event-card__description-title{
+  margin-bottom: 35px;
 }
 </style>

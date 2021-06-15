@@ -2,17 +2,17 @@
   <div>
     <b-button v-if="this.last_days !== null" v-b-modal.modal-prevent-closing variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
 
-
-
     <b-modal
         id="modal-prevent-closing"
         ref="modal"
+        size="lg"
         title="Регистрация на мероприятие"
         @show="resetModal"
         @hidden="resetModal"
         hide-footer
+        class="registration-modal"
     >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
+      <form class="registration-modal__form" ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
             id="input-group-1"
             label="Email"
@@ -95,7 +95,7 @@
         </b-form-group>
 
         <b-button class="modal__ok-btn" variant="primary" block @click="handleOk">Отправить</b-button>
-       
+
       </form>
     </b-modal>
      <b-button v-if="this.last_days === null" disabled variant="primary" class="btn col-9 col-md-4">Регистрация окончена</b-button>
@@ -251,6 +251,13 @@ export default {
 </script>
 <style src="cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css"></style>
 <style scoped>
+.close{
+  color: #2185FB !important;
+}
+.registration-modal__form{
+  margin: 25px 41px 0;
+}
+
 .modal__ok-btn{
   margin-top: 76px ;
 }
