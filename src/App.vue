@@ -3,7 +3,13 @@
     <NavBar/>
     <div class="container">
       <div class="content">
-        <FlashMessage></FlashMessage>
+          <notifications 
+            group="foo" 
+            position="bottom right" 
+            width='355px' 
+            height= '167px'
+            classes="myNote"
+          />
         <router-view/>
       </div>
     </div>
@@ -22,8 +28,9 @@ export default {
   components: {
     NavBar,
     Footer
-  }
+  },
 }
+
 </script>
 
 <style>
@@ -146,18 +153,19 @@ input, select, option {
   border-color: #2185FB !important;
 }
 
-._vue-flash-msg-body_success {
-  z-index: 100000;
+.myNote{
+  background-color: white !important;
+  font-family: Roboto !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  line-height: 150% !important;
+  color: #212223 !important;
+  padding: 31px 20px 31px 20px;
+
+  border-radius: 12px !important;
+
 }
 
-._vue-flash-msg-body {
 
-}
-
-._vue-flash-msg-_right-bottom {
-
-}
-
-._vue-flash-msg-body__text {
-}
 </style>
