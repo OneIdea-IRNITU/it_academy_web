@@ -8,6 +8,8 @@
             position="bottom right" 
             width='355px' 
             height= '167px'
+            classes="myNote"
+            duration='10000'
           />
         <router-view/>
       </div>
@@ -152,8 +154,7 @@ input, select, option {
   border-color: #2185FB !important;
 }
 
-.vue-notification {
-
+.myNote{
   background-color: white !important;
   font-family: Roboto !important;
   font-style: normal !important;
@@ -161,6 +162,8 @@ input, select, option {
   font-size: 14px !important;
   line-height: 150% !important;
   color: #212223 !important;
+  padding: 31px 20px 31px 20px;
+
 
   border-left: 5px solid #2185FB !important;
   border-radius: 12px !important;

@@ -95,6 +95,7 @@
         </b-form-group>
 
         <b-button class="modal__ok-btn" variant="primary" block @click="handleOk">Отправить</b-button>
+       
       </form>
     </b-modal>
   </div>
@@ -129,7 +130,8 @@ export default {
 
       name: '',
       nameState: null,
-      submittedNames: []
+      submittedNames: [],
+      modalShow: false
     }
   },
   methods: {
