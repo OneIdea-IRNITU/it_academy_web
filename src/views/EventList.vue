@@ -31,7 +31,7 @@
             <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
                 <img class="card-img-top"
-                     v-bind:src="event.image ? event.image: '//open.istu.edu/pluginfile.php/1/theme_fordson/headerdefaultimage/1618822616/moocs-benefitting.gif'"
+                     :src="event.image ? event.image: '//open.istu.edu/pluginfile.php/1/theme_fordson/headerdefaultimage/1618822616/moocs-benefitting.gif'"
                      alt="Card image cap">
               </router-link>
             </div>
@@ -41,35 +41,41 @@
                 <h4 class="card-title">{{ event.fullname }}</h4>
               </router-link>
 
+              <p>
+                <a class="category" href="#" @click="setSearchText(event.category)">
+                  <small>#{{ event.category }}</small>
+                </a>
+              </p>
 
-              <a class="category" href="#" @click="setSearchText(event.category)">
-                <small>#{{ event.category }}</small>
-              </a>
+              <div class="card-text">
+                <p>
+                  <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
+                  <small class="startdate"> {{ event.startdate_formatted }}</small>
+                  <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
+                </p>
+                <p>
+                  <small>
+                    <Timer :event="event"/>
+                  </small>
+                </p>
 
-              <p class="card-text">
-                <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                <small class="startdate"> {{ event.startdate_formatted }}</small>
-                <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
-                <small>
-                  <Timer :event="event"/>
-                </small>
-
-
-                <small class="row__item">
-                  <img class="organizers__img" :src="require('@/assets/organizer_icon.svg')" alt="Организаторы">
-                  <span class="row__org-title">
+                <p>
+                  <small class="row__item">
+                    <img class="organizers__img" :src="require('@/assets/organizer_icon.svg')" alt="Организаторы">
+                    <span class="row__org-title">
                   {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
                 </span>
 
-                  <span v-for="(organizer, index) in event.organizers" :key="index">
+                    <span v-for="(organizer, index) in event.organizers" :key="index">
                   <a class="row__org-link" href="#" @click="setSearchText(organizer)">{{ organizer }}</a>
                   {{ event.organizers.length - 1 != index ? ', ' : '' }}
                 </span>
-                </small>
-              </p>
+                  </small>
+                </p>
+              </div>
 
               <router-link v-bind:to="'event/' + event.course_id">
-                <button class="event__button btn btn-primary col-9 ">
+                <button class="event__button btn btn-primary col-6">
                   Подробнее
                 </button>
               </router-link>
@@ -239,7 +245,7 @@ export default {
   border: none;
 }
 
-.event-list__title{
+.event-list__title {
   margin-bottom: 49px;
 }
 
@@ -252,7 +258,7 @@ export default {
   border-radius: 12px 12px 0 0;
   object-fit: cover;
   width: 100%;
-  height: 318px;
+  height: 250px;
 }
 
 .event__title {
