@@ -9,7 +9,6 @@
             width='355px' 
             height= '167px'
             classes="myNote"
-            duration='10000'
           />
         <router-view/>
       </div>
