@@ -95,13 +95,9 @@ export default {
     return {
       loading: true,
       errored: false,
-      dateFilter: 'upcoming',
       publicPath: publicPath,
       searchText: '',
-      dateFilters: [
-        {text: 'Предстоит', value: 'upcoming'},
-        {text: 'Прошло', value: 'past'}
-      ],
+      dateFilters: this.$store.state.dateFilters,
       events: [{
         category: null,
         course_id: null,
@@ -120,6 +116,16 @@ export default {
     }
   },
   computed: {
+    dateFilter: {
+      get(){
+        return this.$store.state.dateFilter
+      },
+      set(value){
+        this.$store.commit('setDateFilter', value)
+      }
+
+
+    },
     useFilters() {
       let searchText = this.searchText.toString().toLowerCase()
       if (searchText) {
