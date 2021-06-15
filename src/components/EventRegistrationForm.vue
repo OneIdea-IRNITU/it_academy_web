@@ -2,6 +2,8 @@
   <div>
     <b-button v-if="this.last_days !== null" v-b-modal.modal-prevent-closing variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
 
+
+
     <b-modal
         id="modal-prevent-closing"
         ref="modal"
@@ -93,6 +95,7 @@
         </b-form-group>
 
         <b-button class="modal__ok-btn" variant="primary" block @click="handleOk">Отправить</b-button>
+       
       </form>
     </b-modal>
      <b-button v-if="this.last_days === null" disabled variant="primary" class="btn col-9 col-md-4">Регистрация окончена</b-button>
@@ -102,6 +105,10 @@
 <script>
 import axios from "axios";
 import ConsentToPersonalData from "@/components/ConsentToPersonalData"
+import Vue from 'vue'
+import Notifications from 'vue-notification'
+
+Vue.use(Notifications)
 
 export default {
   components: {
@@ -186,7 +193,6 @@ export default {
         }
 
       }
-
       return valid
     },
     resetModal() {
@@ -226,15 +232,15 @@ export default {
       const data = JSON.stringify(this.form);
       axios.post('https://open.istu.edu/api/apply.php', data)
           .then((response) => {
-            this.flashMessage.success({
-              title: 'Заявка успешно отправлена',
-              message: response.data
+            this.$notify({
+              group: 'foo',
+              title: 'Заявка принята.',
+              text: response.data,
             });
-            console.log(response);
+            console.log(response.data);
           })
-          .catch((error) => {
-            console.log(error);
-          });
+  
+      
     },
     ucFirst(str) {
       if (!str) return str;
@@ -243,7 +249,7 @@ export default {
   }
 }
 </script>
-
+<style src="cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css"></style>
 <style scoped>
 .modal__ok-btn{
   margin-top: 76px ;
