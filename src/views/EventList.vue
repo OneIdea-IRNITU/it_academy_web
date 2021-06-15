@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Список мероприятий</h1>
+  <div class="event-list">
+    <h1 class="event-list__title">Список мероприятий</h1>
     <div v-if="loading">Loading...</div>
     <div v-else>
       <div class="row mt-3 mb-3">
@@ -239,6 +239,9 @@ export default {
   border: none;
 }
 
+.event-list__title{
+  margin-bottom: 49px;
+}
 
 .search_filters select {
   color: #2185FB;
