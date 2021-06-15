@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-prevent-closing variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
+    <b-button v-if="this.last_days !== null" v-b-modal.modal-prevent-closing variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
 
 
 
@@ -98,6 +98,7 @@
        
       </form>
     </b-modal>
+     <b-button v-if="this.last_days === null" disabled variant="primary" class="btn col-9 col-md-4">Регистрация окончена</b-button>
   </div>
 </template>
 
@@ -112,6 +113,9 @@ Vue.use(Notifications)
 export default {
   components: {
     ConsentToPersonalData
+  },
+  props: {
+    startdate: null,
   },
   data() {
     return {
@@ -130,7 +134,23 @@ export default {
 
       name: '',
       nameState: null,
-      submittedNames: []
+      submittedNames: [],
+
+      last_days: null,
+    }
+  },
+  mounted() {
+    let now = new Date()
+    let startdate = new Date(this.startdate*1000)
+    if (startdate >= now){
+      let nullDate = new Date(this.startdate*1000).setHours(0,0,0,0)
+      let nullNow = new Date().setHours(0,0,0,0)
+      if (nullDate === nullNow){
+        this.last_days = 0
+      }
+      else{ 
+        this.last_days = Math.ceil(((startdate) - now)/(1000 * 60 * 60 * 24))
+      }
     }
   },
   methods: {

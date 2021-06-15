@@ -19,7 +19,7 @@
 
         </div>
       </div>
-      <div class="row ">
+      <div class="row">
         <div v-if="!sortedEvents.length">
           <div class="col">
             <p>Ничего не нашли</p>
@@ -41,25 +41,30 @@
                 <h4 class="card-title">{{ event.fullname }}</h4>
               </router-link>
 
-              <div class="mt-auto">
-                <p>
-                  <a class="category"><small>#{{ event.category }}</small></a>
-                </p>
-                <div class="card-text">
-                  <p>
-                    <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
-                    <small class="startdate"> {{ event.startdate_formatted }}</small>
-                  </p>
-                  <p>
-                    <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
-                  </p>
-                  <p>
-                    <small>
-                      <Timer :event="event"/>
-                    </small>
-                  </p>
-                </div>
 
+              <a class="category"><small>#{{ event.category }}</small></a>
+
+              <p class="card-text">
+                <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
+                <small class="startdate"> {{ event.startdate_formatted }}</small>
+                <small v-if="event.enddate_formatted>0" class="enddate"> - {{ event.enddate_formatted }}</small>
+                <small>
+                  <Timer :event="event"/>
+                </small>
+              
+              
+              <small class="row__item">
+                <img class="organizers__img" :src="require('@/assets/organizer_icon.svg')" alt="Организаторы">
+                <span class="row__org-title">
+                  {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
+                </span>
+
+                <span v-for="(organizer, index) in event.organizers" :key="index">
+                  <a class="row__org-link" @click="setSearchText(organizer)">{{ organizer }}</a>
+                  {{ event.organizers.length - 1 != index ? ', ' : '' }}
+                </span>
+              </small>
+              </p>
 
                 <router-link v-bind:to="'event/' + event.course_id">
                   <button class="event__button btn btn-primary col-9 ">
@@ -67,7 +72,6 @@
                   </button>
                 </router-link>
 
-              </div>
             </div>
           </div>
         </div>
@@ -80,6 +84,7 @@
 <script>
 import axios from "axios";
 import Timer from "@/components/Timer";
+import {publicPath} from "../../vue.config";
 
 export default {
   name: "EventList",
@@ -91,6 +96,7 @@ export default {
       loading: true,
       errored: false,
       dateFilter: 'upcoming',
+      publicPath: publicPath,
       searchText: '',
       dateFilters: [
         {text: 'Предстоит', value: 'upcoming'},
@@ -115,7 +121,7 @@ export default {
   },
   computed: {
     useFilters() {
-      let searchText = this.searchText.toLowerCase()
+      let searchText = this.searchText.toString().toLowerCase()
       if (searchText) {
         return true
       } else {
@@ -125,13 +131,13 @@ export default {
     sortedEvents() {
       let now = new Date();
       let dateFilter = this.dateFilter
-      let searchText = this.searchText.toLowerCase()
+      let searchText = this.searchText.toString().toLowerCase()
 
 
       let events = this.events.filter((elem) => {
 
         if (searchText.length != 0) {
-          return elem.fullname.toLowerCase().includes(searchText) || elem.organizers.toLowerCase().includes(searchText)
+          return elem.fullname.toString().toLowerCase().includes(searchText) || elem.organizers.toString().toLowerCase().includes(searchText)
         } else {
           let startDate = new Date(elem.startdate * 1000)
 
@@ -171,6 +177,9 @@ export default {
   methods: {
     log(item) {
       console.log(item)
+    },
+    setSearchText(searchText){
+      this.searchText = searchText
     }
   },
   mounted() {
@@ -180,6 +189,7 @@ export default {
               let events = [];
               response.data.forEach(function (event) {
 
+                event.organizers = event.organizers.split(', ')
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
 
@@ -190,7 +200,7 @@ export default {
                   let enddate = new Date(event.enddate * 1000)
                   event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
                 }
-
+                
                 events.push(event)
               })
               this.events = events
@@ -227,6 +237,11 @@ export default {
   color: black;
 }
 
+
+.organizers__img{
+  height: 16px;
+}
+  
 .card-text {
   margin-bottom: 34px;
 }
@@ -234,6 +249,7 @@ export default {
 .event__button {
   font-size: 18px !important;
   line-height: 21px !important;
+
 }
 
 </style>
