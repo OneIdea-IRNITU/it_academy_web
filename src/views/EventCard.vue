@@ -3,7 +3,8 @@
     <div class="back-btn">
       <router-link class="back-btn__link" title="Назад" :to="{path:publicPath}">
         <b-button class="back-btn__button" variant="light"><span class="back-btn__text"><img class="back-btn__image"
-            :src="require('@/assets/back_btn_icon.svg')" alt="Календарь"> Назад</span>
+                                                                                             :src="require('@/assets/back_btn_icon.svg')"
+                                                                                             alt="Календарь"> Назад</span>
         </b-button>
       </router-link>
     </div>
@@ -14,7 +15,10 @@
           <div class="col-lg-6 d-flex align-items-start flex-column">
             <h1 class="event-card__title">{{ event.fullname }}</h1>
 
-            <a class="event-card__category">#{{ event.category }}</a>
+            <router-link class="event-card__category"
+                         :to="{path:publicPath, query:{searchText:event.category}}">
+              #{{ event.category }}
+            </router-link>
 
             <div class="event-card__items">
               <div class="event-card__item">
@@ -36,7 +40,8 @@
                 <span v-for="(organizer, index) in event.organizers" :key="index">
               <router-link class="event-card__org-link"
                            :to="{path:publicPath, query:{searchText:organizer}}">
-                {{ organizer }}</router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
+                {{ organizer }}
+              </router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
             </span>
               </div>
             </div>
@@ -111,7 +116,7 @@ export default {
             let startdate = new Date(this.event.startdate * 1000)
 
             this.event.startdate_formatted = startdate.toLocaleString().replace(',', '').replace('00:00', '00').replace('00:00', '')
-            
+
 
           }
           if (this.event.enddate > 0) {
@@ -150,7 +155,8 @@ export default {
   padding: 15px 15px;
   color: #BCBCBE;
 }
-.back-btn__image{
+
+.back-btn__image {
   margin-right: 15px;
 }
 
