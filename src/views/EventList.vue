@@ -150,7 +150,9 @@ export default {
       let events = this.events.filter((elem) => {
 
         if (searchText.length != 0) {
-          return elem.fullname.toString().toLowerCase().includes(searchText) || elem.organizers.toString().toLowerCase().includes(searchText)
+          return elem.fullname.toString().toLowerCase().includes(searchText)
+              || elem.organizers.toString().toLowerCase().includes(searchText)
+              || elem.category.toString().toLowerCase() === searchText
         } else {
           let startDate = new Date(elem.startdate * 1000)
 
