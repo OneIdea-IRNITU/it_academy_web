@@ -42,7 +42,9 @@
               </router-link>
 
 
-              <a class="category"><small>#{{ event.category }}</small></a>
+              <a class="category" href="#" @click="setSearchText(event.category)">
+                <small>#{{ event.category }}</small>
+              </a>
 
               <p class="card-text">
                 <img :src="require('@/assets/calendar_icon.svg')" alt="Календарь">
@@ -195,7 +197,7 @@ export default {
     },
     setSearchText(searchText) {
       this.searchText = searchText
-    }
+    },
   },
   mounted() {
     axios
