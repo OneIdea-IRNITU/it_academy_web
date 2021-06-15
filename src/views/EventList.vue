@@ -51,26 +51,26 @@
                 <small>
                   <Timer :event="event"/>
                 </small>
-              
-              
-              <small class="row__item">
-                <img class="organizers__img" :src="require('@/assets/organizer_icon.svg')" alt="Организаторы">
-                <span class="row__org-title">
+
+
+                <small class="row__item">
+                  <img class="organizers__img" :src="require('@/assets/organizer_icon.svg')" alt="Организаторы">
+                  <span class="row__org-title">
                   {{ event.organizers.length > 1 ? "Организаторы:" : "Организатор:" }}
                 </span>
 
-                <span v-for="(organizer, index) in event.organizers" :key="index">
-                  <a class="row__org-link" @click="setSearchText(organizer)">{{ organizer }}</a>
+                  <span v-for="(organizer, index) in event.organizers" :key="index">
+                  <a class="row__org-link" href="#" @click="setSearchText(organizer)">{{ organizer }}</a>
                   {{ event.organizers.length - 1 != index ? ', ' : '' }}
                 </span>
-              </small>
+                </small>
               </p>
 
-                <router-link v-bind:to="'event/' + event.course_id">
-                  <button class="event__button btn btn-primary col-9 ">
-                    Подробнее
-                  </button>
-                </router-link>
+              <router-link v-bind:to="'event/' + event.course_id">
+                <button class="event__button btn btn-primary col-9 ">
+                  Подробнее
+                </button>
+              </router-link>
 
             </div>
           </div>
@@ -95,13 +95,8 @@ export default {
     return {
       loading: true,
       errored: false,
-      dateFilter: 'upcoming',
       publicPath: publicPath,
-      searchText: '',
-      dateFilters: [
-        {text: 'Предстоит', value: 'upcoming'},
-        {text: 'Прошло', value: 'past'}
-      ],
+      dateFilters: this.$store.state.dateFilters,
       events: [{
         category: null,
         course_id: null,
@@ -120,8 +115,26 @@ export default {
     }
   },
   computed: {
+    dateFilter: {
+      get() {
+        return this.$store.state.dateFilter
+      },
+      set(value) {
+        this.$store.commit('setDateFilter', value)
+      }
+    },
+    searchText: {
+      get() {
+        return this.$store.state.searchText
+      },
+      set(value) {
+        this.$store.commit('setSearchText', value)
+      }
+    },
+
+
     useFilters() {
-      let searchText = this.searchText.toString().toLowerCase()
+      let searchText = this.$store.state.searchText.toString().toLowerCase()
       if (searchText) {
         return true
       } else {
@@ -131,7 +144,7 @@ export default {
     sortedEvents() {
       let now = new Date();
       let dateFilter = this.dateFilter
-      let searchText = this.searchText.toString().toLowerCase()
+      let searchText = this.$store.state.searchText.toString().toLowerCase()
 
 
       let events = this.events.filter((elem) => {
@@ -178,7 +191,7 @@ export default {
     log(item) {
       console.log(item)
     },
-    setSearchText(searchText){
+    setSearchText(searchText) {
       this.searchText = searchText
     }
   },
@@ -200,7 +213,7 @@ export default {
                   let enddate = new Date(event.enddate * 1000)
                   event.enddate_formatted = enddate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
                 }
-                
+
                 events.push(event)
               })
               this.events = events
@@ -238,10 +251,10 @@ export default {
 }
 
 
-.organizers__img{
+.organizers__img {
   height: 16px;
 }
-  
+
 .card-text {
   margin-bottom: 34px;
 }
