@@ -60,7 +60,7 @@
                 </span>
 
                   <span v-for="(organizer, index) in event.organizers" :key="index">
-                  <a class="row__org-link" @click="setSearchText(organizer)">{{ organizer }}</a>
+                  <a class="row__org-link" href="#" @click="setSearchText(organizer)">{{ organizer }}</a>
                   {{ event.organizers.length - 1 != index ? ', ' : '' }}
                 </span>
                 </small>
