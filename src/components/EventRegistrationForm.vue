@@ -130,8 +130,7 @@ export default {
 
       name: '',
       nameState: null,
-      submittedNames: [],
-      modalShow: false
+      submittedNames: []
     }
   },
   methods: {
