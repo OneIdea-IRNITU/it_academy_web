@@ -236,11 +236,13 @@ export default {
 <style scoped>
 
 .search {
-  /*padding: 14px;*/
+  border: none;
 }
+
 
 .search_filters select {
   color: #2185FB;
+  border: none;
 }
 
 .event__img img {
