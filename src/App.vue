@@ -43,7 +43,7 @@ export default {
 
 /*phone-text*/
 h1 {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   font-size: 30px !important;
   line-height: 130% !important;
 }
@@ -81,7 +81,7 @@ small {
 
 @media (min-width: 960px) {
   h1 {
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     font-size: 60px !important;
     line-height: 70px !important;
   }
