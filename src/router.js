@@ -8,20 +8,20 @@ Vue.use(VueRouter)
 
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
-            path: publicPath,
+            path: '',
             component: EventList,
             name: 'EventList',
         },
         {
-            path: publicPath + 'event/:id',
+            path: 'event/:id',
             component: EventCard,
         },
 
         {
-            path: publicPath + '404',
+            path: '404',
             name: '404',
             component: {render: (h) => h("div", ["404! Page Not Found!"])},
         },
