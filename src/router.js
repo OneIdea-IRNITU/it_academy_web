@@ -2,13 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import EventCard from "@/views/EventCard";
 import EventList from "@/views/EventList";
-// import {publicPath} from "../vue.config";
 
 Vue.use(VueRouter)
 
 
 const router = new VueRouter({
-    // mode: 'history',
     routes: [
         {
             path: '',
