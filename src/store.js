@@ -11,11 +11,15 @@ export default new Vuex.Store({
             {text: 'Прошло', value: 'past'}
         ],
         dateFilter: 'upcoming',
+        searchText: '',
 
     },
     mutations: {
         setDateFilter(state, value) {
             state.dateFilter = value
+        },
+        setSearchText(state, value) {
+            state.searchText = value
         },
     },
 
