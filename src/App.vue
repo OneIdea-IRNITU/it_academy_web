@@ -163,8 +163,6 @@ input, select, option {
   color: #212223 !important;
   padding: 31px 20px 31px 20px;
 
-
-  border-left: 5px solid #2185FB !important;
   border-radius: 12px !important;
 
 }
