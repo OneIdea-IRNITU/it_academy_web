@@ -1,6 +1,8 @@
 <template>
   <div>
-    <b-button v-if="this.last_days !== null" v-b-modal.modal-prevent-closing variant="primary" class="btn col-9 col-md-4">Подать заявку</b-button>
+    <b-button v-if="this.last_days !== null" v-b-modal.modal-prevent-closing variant="primary"
+              class="btn col-9 col-md-4">Подать заявку
+    </b-button>
 
     <b-modal
         id="modal-prevent-closing"
@@ -98,7 +100,9 @@
 
       </form>
     </b-modal>
-     <b-button v-if="this.last_days === null" disabled variant="primary" class="btn col-9 col-md-4">Регистрация окончена</b-button>
+    <b-button v-if="this.last_days === null" disabled variant="primary" class="btn col-9 col-md-4">Регистрация
+      окончена
+    </b-button>
   </div>
 </template>
 
@@ -141,15 +145,14 @@ export default {
   },
   mounted() {
     let now = new Date()
-    let startdate = new Date(this.startdate*1000)
-    if (startdate >= now){
-      let nullDate = new Date(this.startdate*1000).setHours(0,0,0,0)
-      let nullNow = new Date().setHours(0,0,0,0)
-      if (nullDate === nullNow){
+    let startdate = new Date(this.startdate * 1000)
+    if (startdate >= now) {
+      let nullDate = new Date(this.startdate * 1000).setHours(0, 0, 0, 0)
+      let nullNow = new Date().setHours(0, 0, 0, 0)
+      if (nullDate === nullNow) {
         this.last_days = 0
-      }
-      else{ 
-        this.last_days = Math.ceil(((startdate) - now)/(1000 * 60 * 60 * 24))
+      } else {
+        this.last_days = Math.ceil(((startdate) - now) / (1000 * 60 * 60 * 24))
       }
     }
   },
@@ -239,8 +242,8 @@ export default {
             });
             console.log(response.data);
           })
-  
-      
+
+
     },
     ucFirst(str) {
       if (!str) return str;
@@ -251,15 +254,23 @@ export default {
 </script>
 <style src="cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css"></style>
 <style scoped>
-.close{
+.close {
   color: #2185FB !important;
 }
-.registration-modal__form{
-  margin: 25px 41px 0;
+
+.registration-modal__form {
+  margin: 25px 0 0;
 }
 
-.modal__ok-btn{
-  margin-top: 76px ;
+@media (min-width: 960px) {
+  .registration-modal__form {
+    margin: 25px 41px 0;
+
+  }
+}
+
+.modal__ok-btn {
+  margin-top: 76px;
 }
 </style>
 
