@@ -5,6 +5,7 @@
     </b-button>
 
     <b-modal
+        header-class = "header-class"
         id="modal-prevent-closing"
         ref="modal"
         size="lg"
@@ -264,11 +265,17 @@ export default {
   margin: 25px 0 0;
 }
 
+/* верх справа снизу слева*/
+/deep/ .header-class {
+  margin: 39px 48px 0px 57px;
+  padding: 0;
+  border-bottom: 0px;
+}
+
 @media (min-width: 960px) {
   .registration-modal__form {
-    margin: 25px 41px 0;
-
-  }
+    margin: 25px 32px 32px 41px;
+  }  
 }
 
 .modal__ok-btn {
