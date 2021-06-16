@@ -19,14 +19,14 @@
 
         </div>
       </div>
-      <div class="row">
+      <div class="main_row row">
         <div v-if="!sortedEvents.length">
           <div class="col">
             <p>Ничего не нашли</p>
           </div>
         </div>
 
-        <div v-else class="col-12 col-md-6 col-lg-4 mb-4" v-for="event in sortedEvents" :key="event.course_id">
+        <div v-else class="card-row col-12 col-md-6 col-lg-4 mb-4 mt-auto" v-for="event in sortedEvents" :key="event.course_id">
           <div class="card h-100 ">
             <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
@@ -88,7 +88,7 @@
 
   </div>
 </template>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
 <script>
 import axios from "axios";
 import Timer from "@/components/Timer";
@@ -216,7 +216,18 @@ export default {
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
 
-                  event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+                  let Day_formatted = startdate.getDate()
+                  if(Day_formatted < 10){Day_formatted ='0'+Day_formatted+'.'}
+                  else{Day_formatted =Day_formatted+'.'}
+                  let Month_formatted = startdate.getMonth() + 1
+                  if(Month_formatted < 10){Month_formatted ='0'+Month_formatted+'.'}
+                  else{Month_formatted =Month_formatted+'.'}
+                  let Year_formatted = startdate.getFullYear()
+                  let Hours_formatted = startdate.getHours()
+                  if(Hours_formatted === 0){Hours_formatted=''}
+                  else{Hours_formatted = ' ' + Hours_formatted + ':00'}
+
+                  event.startdate_formatted = Day_formatted + Month_formatted + Year_formatted + Hours_formatted
 
                 }
                 if (event.enddate > 0) {
@@ -236,9 +247,9 @@ export default {
         .finally(() => (this.loading = false));
   },
 
-}
-</script>
+};
 
+</script>
 <style scoped>
 
 .search {
@@ -277,7 +288,6 @@ export default {
 .event__button {
   font-size: 18px !important;
   line-height: 21px !important;
-
 }
 
 </style>

@@ -117,8 +117,18 @@ export default {
           if (this.event.startdate > 0) {
             let startdate = new Date(this.event.startdate * 1000)
 
-            this.event.startdate_formatted = startdate.toLocaleString().replace(',', '').replace('00:00', '00').replace('00:00', '')
+            let Day_formatted = startdate.getDate()
+            if(Day_formatted < 10){Day_formatted ='0'+Day_formatted+'.'}
+            else{Day_formatted =Day_formatted+'.'}
+            let Month_formatted = startdate.getMonth() + 1
+            if(Month_formatted < 10){Month_formatted ='0'+Month_formatted+'.'}
+            else{Month_formatted =Month_formatted+'.'}
+            let Year_formatted = startdate.getFullYear()
+            let Hours_formatted = startdate.getHours()
+            if(Hours_formatted === 0){Hours_formatted=''}
+            else{Hours_formatted = ' ' + Hours_formatted + ':00'}
 
+            this.event.startdate_formatted = Day_formatted + Month_formatted + Year_formatted + Hours_formatted
 
           }
           if (this.event.enddate > 0) {
