@@ -39,9 +39,7 @@
                 </span>
                 <span v-for="(organizer, index) in event.organizers" :key="index">
               <router-link class="event-card__org-link"
-                           :to="{path:publicPath, query:{searchText:organizer}}">
-                {{ organizer }}
-              </router-link>{{ event.organizers.length - 1 != index ? ', ' : '' }}
+                           :to="{path:publicPath, query:{searchText:organizer}}">{{organizer}}</router-link>{{event.organizers.length - 1 != index ? ', ' : ''}}
             </span>
               </div>
             </div>
