@@ -1,7 +1,7 @@
 <template>
   <div class="event-list">
     <h1 class="event-list__title">Список мероприятий</h1>
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading">Загрузка...</div>
     <div v-else>
       <div class="row mt-3 mb-3">
         <div class="col-md-12">

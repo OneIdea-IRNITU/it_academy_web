@@ -9,7 +9,7 @@
       </router-link>
     </div>
     <div class="event-card">
-      <div v-if="loading">Loading...</div>
+      <div v-if="loading">Загрузка...</div>
       <div v-else>
         <div class="row event-card__info">
           <div class="col-lg-6 d-flex align-items-start flex-column">
