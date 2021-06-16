@@ -14,7 +14,7 @@
           <b-navbar-nav class="nav__items">
             <b-nav-item href="#" active>Мероприятия</b-nav-item>
             <b-nav-item href="https://elc.istu.edu/">Центр ЭО</b-nav-item>
-            <b-nav-item href="#">Личный кабинет</b-nav-item>
+            <b-nav-item href="https://open.istu.edu/login/index.php">Личный кабинет</b-nav-item>
           </b-navbar-nav>
 
           <b-navbar-nav class="ml-auto">
