@@ -87,7 +87,6 @@
 
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import Timer from "@/components/Timer";
@@ -215,7 +214,18 @@ export default {
                 if (event.startdate > 0) {
                   let startdate = new Date(event.startdate * 1000)
 
-                  event.startdate_formatted = startdate.toLocaleString().replace(',', '').slice(0, -3).replace('00:00', '')
+                  let Day_formatted = startdate.getDate()
+                  if(Day_formatted < 10){Day_formatted ='0'+Day_formatted+'.'}
+                  else{Day_formatted =Day_formatted+'.'}
+                  let Month_formatted = startdate.getMonth() + 1
+                  if(Month_formatted < 10){Month_formatted ='0'+Month_formatted+'.'}
+                  else{Month_formatted =Month_formatted+'.'}
+                  let Year_formatted = startdate.getFullYear()
+                  let Hours_formatted = startdate.getHours()
+                  if(Hours_formatted === 0){Hours_formatted=''}
+                  else{Hours_formatted = ' ' + Hours_formatted + ':00'}
+
+                  event.startdate_formatted = Day_formatted + Month_formatted + Year_formatted + Hours_formatted
 
                 }
                 if (event.enddate > 0) {
@@ -235,9 +245,9 @@ export default {
         .finally(() => (this.loading = false));
   },
 
-}
-</script>
+};
 
+</script>
 <style scoped>
 
 .search {
@@ -277,6 +287,11 @@ export default {
   font-size: 18px !important;
   line-height: 21px !important;
 
+  position: absolute;
+  bottom: 20px;
+}
+.card-body{
+  margin-bottom: 20px;
 }
 
 </style>
