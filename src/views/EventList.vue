@@ -19,14 +19,14 @@
 
         </div>
       </div>
-      <div class="main_row row">
+      <div class="row">
         <div v-if="!sortedEvents.length">
           <div class="col">
             <p>Ничего не нашли</p>
           </div>
         </div>
 
-        <div v-else class="card-row col-12 col-md-6 col-lg-4 mb-4 mt-auto" v-for="event in sortedEvents" :key="event.course_id">
+        <div v-else class="col-12 col-md-6 col-lg-4 mb-4" v-for="event in sortedEvents" :key="event.course_id">
           <div class="card h-100 ">
             <div class="event__img">
               <router-link v-bind:to="'event/' + event.course_id">
@@ -88,7 +88,6 @@
 
   </div>
 </template>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
 <script>
 import axios from "axios";
 import Timer from "@/components/Timer";
@@ -288,6 +287,12 @@ export default {
 .event__button {
   font-size: 18px !important;
   line-height: 21px !important;
+
+  position: absolute;
+  bottom: 20px;
+}
+.card-body{
+  margin-bottom: 20px;
 }
 
 </style>
