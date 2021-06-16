@@ -239,6 +239,8 @@ export default {
               group: 'foo',
               title: 'Заявка принята.',
               text: response.data,
+              duration: 5000,
+              speed: 1000
             });
             console.log(response.data);
           })

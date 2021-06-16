@@ -6,8 +6,6 @@
           <notifications 
             group="foo" 
             position="bottom right" 
-            width='355px' 
-            height= '167px'
             classes="myNote"
           />
         <router-view/>
@@ -161,7 +159,7 @@ input, select, option {
   font-size: 14px !important;
   line-height: 150% !important;
   color: #212223 !important;
-  padding: 31px 20px 31px 20px;
+  padding: 31px 30px 31px 30px;
 
   border-radius: 12px !important;
 
